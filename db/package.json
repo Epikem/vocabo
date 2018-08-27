@@ -1,0 +1,19 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --watch src/ src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "nodemon": "^1.18.3",
+    "pg": "^7.4.3",
+    "request": "^2.87.0",
+    "sync-request": "^6.0.0"
+  }
+}
