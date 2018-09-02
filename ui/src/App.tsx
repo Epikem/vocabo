@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { WordSearch } from './containers';
+import { WordSearch, ThemeSelection } from './containers';
 import { Button } from './presentational';
 import { darkTheme, lightTheme, ThemeProvider } from './theme';
 
@@ -29,7 +29,7 @@ class App extends React.Component<{}> {
           <div>
             <Switch>
               <Route exact={true} path={'/'} component={WordSearch}/>
-              {/* <Route path={'/theme'} component={ThemeSwapper}/> */}
+              <Route path={'/theme'} component={ThemeSelection}/>
             </Switch>
             <ThemeProvider theme={darkTheme}>
               <Button onClick={this.methods.changeTheme('dark')}>dark theme</Button>
