@@ -1,18 +1,26 @@
 import * as React from 'react';
+import { Button } from '../presentational';
 
 class WordSearch extends React.Component<any, any>{
   public state = {
 
   }
 
-  public constructor(entitiesPageProps:any){
-    super(entitiesPageProps);
+  public constructor(props: any) {
+    super(props);
     return this;
   }
 
-  public render () {
+  public render() {
     return (
-      <div>WordSearch</div>
+      <div>
+        WordSearch
+        <Button>
+          <div>
+            test button
+          </div>
+        </Button>
+      </div>
     )
 
   }
