@@ -21,6 +21,7 @@
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "2.29.0",
     "jest": "22.4.2",
+    "nodemon": "^1.18.4",
     "object-assign": "4.1.1",
     "polished": "^2.0.3",
     "postcss-flexbugs-fixes": "3.2.0",
@@ -58,7 +59,8 @@
     "deploy": "gh-pages -d build",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "watch": "nodemon --watch src scripts/start.js"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
