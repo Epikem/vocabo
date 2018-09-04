@@ -14,7 +14,7 @@ export type RootAction = CountersAction;
 
 const rootReducer = combineReducers({
   // router: routerReducer,
-  counters: CountersReducer
+  counter: CountersReducer
 });
 
 function configureStore(initialState?: object) {
