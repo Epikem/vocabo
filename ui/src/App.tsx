@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { WordSearch, ThemeSelection } from './containers';
+import { ThemeSelection, WordSearch } from './containers';
+import Counter from './containers/Counter';
 import { Button } from './presentational';
 import { darkTheme, lightTheme, ThemeProvider } from './theme';
 
@@ -37,6 +38,7 @@ class App extends React.Component<{}> {
             <ThemeProvider theme={lightTheme}>
               <Button onClick={this.methods.changeTheme('light')}>light theme</Button>
             </ThemeProvider>
+            <Counter label='dsd'></Counter>
           </div>
         </BrowserRouter>
       </ThemeProvider>
