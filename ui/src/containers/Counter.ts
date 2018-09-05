@@ -8,7 +8,7 @@ const mapStateToProps = (state: any) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  onIncrement: increment,
+  increment,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

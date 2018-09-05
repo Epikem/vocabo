@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 const Counter = (props: any) => {
-  const { count, onIncrement } = props;
+  const { count, increment } = props;
   return(
     <div>
       current Counter = 
       <div>
         {count}
       </div>
-      <button onClick={onIncrement}>increment</button>
+      <button onClick={increment}>increment</button>
     </div>
   )
 }
