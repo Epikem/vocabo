@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import { action, ActionType } from "typesafe-actions";
+import { action as typedAction, ActionType } from "typesafe-actions";
 
 const ADD = "counter/ADD";
 const INCREMENT = "counter/INCREMENT";
 
-export const add = (amount: number) => action(ADD, amount);
-export const increment = () => action(INCREMENT);
+export const add = (amount: number) => typedAction(ADD, amount);
+export const increment = () => typedAction(INCREMENT);
 
 type counters = typeof increment | typeof add;
 
