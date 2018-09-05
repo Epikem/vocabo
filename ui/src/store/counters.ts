@@ -11,13 +11,13 @@ type counters = typeof increment | typeof add;
 
 type CountersAction = ActionType<counters>;
 
-interface CountersState {
+interface ICountersState {
   readonly reduxCounter: number;
 }
 
 // CLASSIC API
 
-const CountersReducer = combineReducers<CountersState, CountersAction>({
+const CountersReducer = combineReducers<ICountersState, CountersAction>({
   reduxCounter: (state = 0, action) => {
     switch (action.type) {
       case INCREMENT:
@@ -30,4 +30,4 @@ const CountersReducer = combineReducers<CountersState, CountersAction>({
   }
 });
 
-export { CountersReducer, CountersState, CountersAction };
+export { CountersReducer, ICountersState, CountersAction };
