@@ -1,44 +1,27 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { ThemeSelection, WordSearch } from './containers';
 import Counter from './containers/Counter';
 import { Button } from './presentational';
-import { darkTheme, lightTheme, ThemeProvider } from './theme';
+import { ThemeProvider } from './theme';
 
-class App extends React.Component<{}> {
-  public state = {
-    theme: lightTheme,
-  }
-
-  private methods = {
-    changeTheme: (targetTheme:any) => {
-      return () => {
-        let theme = {};
-        if(targetTheme === 'dark') {
-          theme = darkTheme;
-        }
-        else { theme = lightTheme; }
-        this.setState({theme});
-      }
-    }
-  }
+class App extends React.Component<any> {
 
   public render() {
+    const { currentTheme } = this.props;
     return (
-      <ThemeProvider theme={this.state.theme}>
+      <ThemeProvider theme={currentTheme}>
         <BrowserRouter>
           <div>
             <Switch>
               <Route exact={true} path={'/'} component={WordSearch}/>
               <Route path={'/theme'} component={ThemeSelection}/>
             </Switch>
-            <ThemeProvider theme={darkTheme}>
-              <Button onClick={this.methods.changeTheme('dark')}>dark theme</Button>
-            </ThemeProvider>
-            <ThemeProvider theme={lightTheme}>
-              <Button onClick={this.methods.changeTheme('light')}>light theme</Button>
-            </ThemeProvider>
-            <Counter label='dsd'></Counter>
+            <Link to={'/'}>to home</Link>
+            <Link to={'/theme'}>to theme</Link>
+            <div>theme : {currentTheme.name}</div>
+            <Counter label='dsd' />
           </div>
         </BrowserRouter>
       </ThemeProvider>
@@ -48,5 +31,12 @@ class App extends React.Component<{}> {
 
 }
 
+// const mapStateToProps = (state: any) => ({
+//   currentTheme: state.theme.currentTheme
+// })
 
-export default App;
+const mapStateToProps = (state: any) => ({
+  currentTheme: state.theme.currentTheme
+});
+
+export default connect(mapStateToProps)(App);
