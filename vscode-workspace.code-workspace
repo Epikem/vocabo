@@ -4,13 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "db"
+			"path": "server"
 		},
 		{
-			"path": "ui"
-		},
-		{
-			"path": "log"
+			"path": "client"
 		}
 	],
 	"settings": {}
