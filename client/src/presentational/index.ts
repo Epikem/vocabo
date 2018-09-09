@@ -1,3 +1,5 @@
-export { Button } from './Button';
-export { Counter } from './Counter';
-export { ThemeSelect } from './ThemeSelect';
+export * from './Button';
+export * from './Counter';
+export * from './ThemeSelect';
+export * from './Layout';
+export * from './Header';
