@@ -16,6 +16,11 @@ export interface IThemeInterface {
 
 // color scheme : https://coolors.co/ffc093-ede580-a4af69-a5d37a-8aa399
 
+const sharedTheme = {
+  headerHeight: '100%',
+  titleSize: '30px',
+}
+
 const colors = {
   warning: '#ffc093',
   primary: '#ede580',
@@ -27,14 +32,14 @@ export const lightTheme = {
   fontColor: 'black',
   fontSize: '15px',
   name: 'light',
-  primaryColor: "#e9e9eb",
+  ...sharedTheme
 };
 
 export const darkTheme = {
   fontColor: 'white',
   fontSize: '15px',
   name: 'dark',
-  primaryColor: "gray",
+  ...sharedTheme
 };
 
 injectGlobal`
