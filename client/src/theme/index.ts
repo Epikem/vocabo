@@ -28,4 +28,11 @@ export const darkTheme = {
   primaryColor: "gray",
 };
 
-export { css, injectGlobal, keyframes, ThemeProvider };
+injectGlobal`
+  *{
+    transition: all .15s linear;
+    transition-property: box-shadow, border-color, height, width, background-color, font-size, color;
+  }
+`;
+
+export { css, keyframes, ThemeProvider };
