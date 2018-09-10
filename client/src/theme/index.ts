@@ -14,6 +14,15 @@ export interface IThemeInterface {
   primaryColor: string;
 }
 
+// color scheme : https://coolors.co/ffc093-ede580-a4af69-a5d37a-8aa399
+
+const colors = {
+  warning: '#ffc093',
+  primary: '#ede580',
+  secondary: '#a4af69',
+  tertiary: '#8aa399',
+  success: '#a5d37a',
+}
 export const lightTheme = {
   fontColor: 'black',
   fontSize: '15px',
