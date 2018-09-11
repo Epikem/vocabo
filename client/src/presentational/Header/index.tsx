@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { HeaderBox, LogoBox } from './HeaderStyles';
 
 interface IHeaderProps {
 
@@ -6,8 +7,9 @@ interface IHeaderProps {
 
 export const Header: React.SFC<IHeaderProps> = (props) => {
   return (
-    <div>
-      Header
-    </div>
+    <HeaderBox>
+      <LogoBox>Memorybook</LogoBox>
+      
+    </HeaderBox>
   );
 };
