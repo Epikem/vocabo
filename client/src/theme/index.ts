@@ -51,6 +51,11 @@ injectGlobal`
     transition: all .15s linear;
     transition-property: box-shadow, border-color, height, width, background-color, font-size, color;
   }
+  
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
 `;
 
 export { css, keyframes, ThemeProvider };
