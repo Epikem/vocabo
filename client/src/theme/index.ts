@@ -1,4 +1,5 @@
 import * as styledComponents from "styled-components";
+import { invert, darken, lighten } from "polished";
 
 const {
   css,
@@ -28,17 +29,20 @@ const colors = {
   tertiary: '#8aa399',
   success: '#a5d37a',
 }
+
 export const lightTheme = {
-  fontColor: 'black',
+  fontColor: darken('0.3', colors.secondary),
   fontSize: '15px',
   name: 'light',
+  primaryColor: colors.primary,
   ...sharedTheme
 };
 
 export const darkTheme = {
-  fontColor: 'white',
+  fontColor: lighten('0.3', invert(colors.secondary)),
   fontSize: '15px',
   name: 'dark',
+  primaryColor: darken('0.1',invert(colors.primary)),
   ...sharedTheme
 };
 
