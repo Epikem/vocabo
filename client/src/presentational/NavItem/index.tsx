@@ -1,13 +1,15 @@
 import * as React from 'react';
+import { NavItemBox } from './NavItemStyles';
 
 interface INavItemProps {
-
+  to: string;
+  children: any;
 }
 
-export const NavItem: React.SFC<INavItemProps> = (props) => {
+export const NavItem = (props: INavItemProps) => {
   return (
-    <div>
-      NavItem
-    </div>
+    <NavItemBox {...props}>
+      {props.children}
+    </NavItemBox>
   );
 };
