@@ -85,6 +85,21 @@ export const darkTheme: IThemeInterface = {
   ...sharedTheme
 };
 
+export const theme = (
+  name: themeAttributeKey,
+  ...effects: themeEffectKey[]
+) => {
+  return (props: any) => {
+    let ret = props.theme[name];
+    if (effects) {
+      for (const effect of effects) {
+        ret = props.theme[effect](ret);
+      }
+    }
+    return ret;
+  };
+};
+
 injectGlobal`
   *{
     transition: all .15s linear;
