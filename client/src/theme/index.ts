@@ -1,48 +1,87 @@
 import * as styledComponents from "styled-components";
-import { invert, darken, lighten } from "polished";
+import { invert, darken, lighten, transparentize } from "polished";
 
 const {
   css,
   injectGlobal,
   keyframes,
   ThemeProvider
-} = styledComponents as styledComponents.ThemedStyledComponentsModule<IThemeInterface>;
+} = styledComponents as styledComponents.ThemedStyledComponentsModule<
+IThemeInterface
+>;
 
-export interface IThemeInterface {
-  fontColor: string,
-  fontSize: string;
-  name: string;
-  primaryColor: string;
-}
+type Effect = (color: string) => string;
+
+type themeEffects = Record<themeEffectKey, Effect>;
+
+type themeAttributes = Record<themeAttributeKey, string>;
+
+export interface IThemeInterface extends themeEffects, themeAttributes {}
+
+type themeAttributeKey =
+  | "headerHeight"
+  | "titleSize"
+  | "boxShadow"
+  | "fontColor"
+  | "fontSize"
+  | "name"
+  | "primaryColor";
+
+type themeEffectKey = "activeEffect" | "hoverEffect" | "invertEffect";
 
 // color scheme : https://coolors.co/ffc093-ede580-a4af69-a5d37a-8aa399
 
 const sharedTheme = {
-  headerHeight: '100%',
-  titleSize: '30px',
-}
+  headerHeight: "100%",
+  titleSize: "30px",
+  boxShadow: `0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)}`
+};
 
 const colors = {
-  warning: '#ffc093',
-  primary: '#ede580',
-  secondary: '#a4af69',
-  tertiary: '#8aa399',
-  success: '#a5d37a',
-}
+  warning: "#ffc093",
+  primary: "#ede580",
+  secondary: "#a4af69",
+  tertiary: "#8aa399",
+  success: "#a5d37a"
+};
 
-export const lightTheme = {
-  fontColor: darken('0.3', colors.secondary),
-  fontSize: '15px',
-  name: 'light',
+const lightEffects: themeEffects = {
+  activeEffect: (color: string) => lighten(0.2, color),
+  hoverEffect: (color: string) => {
+    return darken(0.2, color);
+  },
+  invertEffect: (color: string) => {
+    return invert(color);
+  }
+};
+
+const darkEffects: themeEffects = {
+  activeEffect: (color: string) => {
+    return darken(0.3, color);
+  },
+  hoverEffect: (color: string) => {
+    return lighten(0.3, color);
+  },
+  invertEffect: (color: string) => {
+    return invert(color);
+  }
+};
+
+export const lightTheme: IThemeInterface = {
+  fontColor: transparentize(0.2, darken("0.2", colors.secondary)),
+  fontSize: "15px",
+  name: "light",
   primaryColor: colors.primary,
+  ...lightEffects,
   ...sharedTheme
 };
 
-export const darkTheme = {
-  fontColor: lighten('0.3', invert(colors.secondary)),
-  fontSize: '15px',
-  name: 'dark',
-  primaryColor: darken('0.1',invert(colors.primary)),
+export const darkTheme: IThemeInterface = {
+  fontColor: transparentize(0.2, lighten("0.2", invert(colors.secondary))),
+  fontSize: "15px",
+  name: "dark",
+  primaryColor: darken("0.1", invert(colors.primary)),
+  ...darkEffects,
   ...sharedTheme
 };
 
