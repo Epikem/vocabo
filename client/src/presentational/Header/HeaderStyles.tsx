@@ -1,5 +1,6 @@
 import { darken, lighten, desaturate } from 'polished';
 import styled from "styled-components";
+import { theme } from '../../theme';
 
 const HeaderBox = styled.div`
   background-color: ${props => lighten(0.1,props.theme.primaryColor)};
@@ -12,13 +13,13 @@ const LogoBox = styled.div`
 `
 
 const HeaderItem = styled.div`
-  color: ${props => props.theme.fontColor};
-  font-size: ${props => props.theme.titleSize};
+  color: ${theme('fontColor')};
+  font-size: ${theme('titleSize')};
   padding: .5rem;
   border-bottom: 1px solid transparent;
 
   :hover{
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid ${theme('fontColor')};
   }
 `
 

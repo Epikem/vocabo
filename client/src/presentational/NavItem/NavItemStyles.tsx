@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { theme } from '../../theme';
 
 export const NavItemBox = styled(NavLink)`
-  padding-left: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
   user-select: none;
   cursor: pointer;
   font-size: inherit;
