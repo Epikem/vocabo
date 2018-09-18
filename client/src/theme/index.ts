@@ -2,10 +2,11 @@ import * as styledComponents from "styled-components";
 import { invert, darken, lighten, transparentize } from "polished";
 
 const {
+  default: styled,
   css,
-  injectGlobal,
   keyframes,
-  ThemeProvider
+  ThemeProvider,
+  createGlobalStyle
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<
 IThemeInterface
 >;
@@ -100,16 +101,8 @@ export const theme = (
   };
 };
 
-injectGlobal`
-  *{
-    transition: all .15s linear;
-    transition-property: box-shadow, border-color, height, width, background-color, font-size, color;
-  }
-  
-  a {
-    text-decoration: inherit;
-    color: inherit;
-  }
-`;
+styled.createGlobalStyle = createGlobalStyle;
 
-export { css, keyframes, ThemeProvider };
+export default styled;
+
+export { css, keyframes, ThemeProvider, createGlobalStyle };
