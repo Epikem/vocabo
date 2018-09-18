@@ -3,7 +3,24 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeSelection, WordSearch } from './containers';
 import { Layout } from './presentational';
-import { ThemeProvider } from './theme';
+import styled, { ThemeProvider, createGlobalStyle, theme } from './theme';
+
+const Global = styled.createGlobalStyle`
+  *{
+    transition: all .15s linear;
+    transition-property: box-shadow, border-color, height, width, background-color, font-size, color;
+  }
+  
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
+  body{
+    background-color: ${theme('primaryColor', 'activeEffect')};
+  }
+`;
+
 
 class App extends React.Component<any> {
 
@@ -19,6 +36,7 @@ class App extends React.Component<any> {
                 <Route path={'/theme'} component={ThemeSelection}/>
               </Switch>
             </div>
+            <Global/>
           </Layout>
         </BrowserRouter>
       </ThemeProvider>
@@ -27,6 +45,9 @@ class App extends React.Component<any> {
 
 
 }
+
+
+
 
 // const mapStateToProps = (state: any) => ({
 //   currentTheme: state.theme.currentTheme
