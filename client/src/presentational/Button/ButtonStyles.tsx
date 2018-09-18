@@ -1,5 +1,5 @@
 import { darken, lighten } from 'polished';
-import styled from "styled-components";
+import styled from '../../theme';
 
 const ButtonBox = styled.button`
   background-color: ${props => props.theme.primaryColor};

@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import styled from "styled-components";
-import { theme } from '../../theme';
+import styled, { theme } from '../../theme';
 
 export const NavItemBox = styled(NavLink)`
   padding-left: 10px;
