@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ButtonBox } from './ButtonStyles';
 
-const Button: any = ({children, onClick}: {children: string, onClick: any}, props:any) => {
+const Button = ({children, onClick}: {children: React.ReactNode, onClick?: React.MouseEventHandler}, props:React.ButtonHTMLAttributes<HTMLButtonElement>[]) => {
+
   return (
     <ButtonBox onClick={onClick} {...props}>{children}</ButtonBox>
   )

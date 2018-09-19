@@ -8,10 +8,10 @@ const FlexBoxContainer = styled.div<IFlexBoxProps>`
 
 export interface IFlexBoxProps {
   direction: string;
-  children: any;
+  children: React.ReactNode;
 }
 
-export function FlexBox (props: IFlexBoxProps) {
+export const FlexBox: React.SFC<IFlexBoxProps> = (props) => {
   return (
     <FlexBoxContainer {...props}>
       {props.children}

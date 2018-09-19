@@ -3,10 +3,9 @@ import { NavItemBox } from './NavItemStyles';
 
 interface INavItemProps {
   to: string;
-  children: any;
 }
 
-export const NavItem = (props: INavItemProps) => {
+export const NavItem : React.SFC<INavItemProps> = (props) => {
   return (
     <NavItemBox {...props}>
       {props.children}
