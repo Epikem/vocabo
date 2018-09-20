@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeSelection, WordSearch } from './containers';
 import { Layout } from './presentational';
-import styled, { ThemeProvider, createGlobalStyle, theme } from './theme';
+import styled, { ThemeProvider, theme } from './theme';
 
 const Global = styled.createGlobalStyle`
   *{
     transition: all .15s linear;
     transition-property: box-shadow, border-color, height, width, background-color, font-size, color;
+  }
+
+  div, p{
+    color: inherit;
   }
   
   a {
@@ -17,6 +21,7 @@ const Global = styled.createGlobalStyle`
   }
 
   body{
+    color: ${theme('fontColor')};
     background-color: ${theme('primaryColor', 'activeEffect')};
   }
 `;
