@@ -8,18 +8,19 @@ const HeaderBox = styled.div`
 const LogoBox = styled.div`
   transition: all .15s linear;
   transition-property: box-shadow, height, width, background-color, font-size, color;
+  display: flex;
 `
 
 const HeaderItem = styled.div`
-  color: ${theme('fontColor')};
+  color: ${theme('navFontColor')};
   font-size: ${theme('titleSize')};
-  padding: .5rem;
   border-bottom: 2px solid transparent;
+  display: flex;
 
   :hover{
-    border-bottom: 2px solid ${theme('fontColor')};
+    border-bottom: 2px solid ${theme('navFontColor')};
   }
-  
+
 `
 
 export { HeaderBox, LogoBox, HeaderItem };
