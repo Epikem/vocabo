@@ -24,6 +24,7 @@ type themeAttributeKey =
   | "titleSize"
   | "boxShadow"
   | "fontColor"
+  | "navFontColor"
   | "fontSize"
   | "name"
   | "primaryColor";
@@ -69,21 +70,23 @@ const darkEffects: themeEffects = {
 };
 
 export const lightTheme: IThemeInterface = {
-  fontColor: transparentize(0.2, darken("0.2", colors.secondary)),
+  navFontColor: transparentize(0.2, darken("0.2", colors.secondary)),
+  fontColor: 'black',
   fontSize: "15px",
   name: "light",
   primaryColor: colors.primary,
   ...lightEffects,
-  ...sharedTheme
+  ...sharedTheme,
 };
 
 export const darkTheme: IThemeInterface = {
-  fontColor: transparentize(0.2, lighten("0.2", invert(colors.secondary))),
+  navFontColor: transparentize(0.2, lighten("0.2", invert(colors.secondary))),
+  fontColor: 'white',
   fontSize: "15px",
   name: "dark",
   primaryColor: darken("0.1", invert(colors.primary)),
   ...darkEffects,
-  ...sharedTheme
+  ...sharedTheme,
 };
 
 export const theme = (
