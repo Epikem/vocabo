@@ -17,19 +17,25 @@ type themeEffects = Record<themeEffectKey, Effect>;
 
 type themeAttributes = Record<themeAttributeKey, string>;
 
-export interface IThemeInterface extends themeEffects, themeAttributes {}
+interface IThemeEffects {
+  sharedEffect1: Effect;
+  activeEffect: Effect;
+  hoverEffect: Effect;
+  invertEffect: Effect;
+}
 
-type themeAttributeKey =
-  | "headerHeight"
-  | "titleSize"
-  | "boxShadow"
-  | "fontColor"
-  | "navFontColor"
-  | "fontSize"
-  | "name"
-  | "primaryColor";
+interface IThemeAttributes {
+  headerHeight: string;
+  titleSize: string;
+  boxShadow: string;
+  navFontColor: string;
+  fontSize: string;
+  themeName: themeName;
+  primaryColor: string;
+  fontColor: string;
+}
 
-type themeEffectKey = "activeEffect" | "hoverEffect" | "invertEffect";
+export interface ITheme extends IThemeEffects, IThemeAttributes {}
 
 // color scheme : https://coolors.co/ffc093-ede580-a4af69-a5d37a-8aa399
 
