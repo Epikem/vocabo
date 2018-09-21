@@ -11,16 +11,4 @@ const LogoBox = styled.div`
   display: flex;
 `
 
-const HeaderItem = styled.div`
-  color: ${theme('navFontColor')};
-  font-size: ${theme('titleSize')};
-  border-bottom: 2px solid transparent;
-  display: flex;
-
-  :hover{
-    border-bottom: 2px solid ${theme('navFontColor')};
-  }
-
-`
-
-export { HeaderBox, LogoBox, HeaderItem };
+export { HeaderBox, LogoBox };
