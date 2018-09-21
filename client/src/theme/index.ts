@@ -6,9 +6,9 @@ const {
   css,
   keyframes,
   ThemeProvider,
-  createGlobalStyle
+  createGlobalStyle,
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<
-IThemeInterface
+ITheme
 >;
 
 type Effect = (color: string) => string;
@@ -75,23 +75,23 @@ const darkEffects: themeEffects = {
   }
 };
 
-export const lightTheme: IThemeInterface = {
+export const lightTheme: ITheme = {
   navFontColor: transparentize(0.2, darken("0.2", colors.secondary)),
   fontColor: 'black',
   fontSize: "15px",
-  name: "light",
-  primaryColor: colors.primary,
-  ...lightEffects,
+  themeName: "light",
+  primaryColor: 'colors.warning',
+  ...lightThemeEffects,
   ...sharedTheme,
 };
 
-export const darkTheme: IThemeInterface = {
+export const darkTheme: ITheme = {
   navFontColor: transparentize(0.2, lighten("0.2", invert(colors.secondary))),
   fontColor: 'white',
   fontSize: "15px",
-  name: "dark",
-  primaryColor: darken("0.1", invert(colors.primary)),
-  ...darkEffects,
+  themeName: "dark",
+  primaryColor: 'darken("0.1", invert(colors.primary))',
+  ...darkThemeEffects,
   ...sharedTheme,
 };
 

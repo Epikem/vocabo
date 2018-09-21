@@ -1,6 +1,6 @@
 import { bindActionCreators, combineReducers } from "redux";
 import { action as typedAction, ActionType } from "typesafe-actions";
-import { darkTheme, IThemeInterface, lightTheme } from './../theme/index';
+import { getTheme, ITheme, } from './../theme/index';
 
 const CHANGE = "theme/CHANGE";
 
@@ -11,7 +11,7 @@ type themes = typeof changeTheme;
 type ThemesAction = ActionType<themes>;
 
 interface IThemesState {
-  readonly currentTheme: IThemeInterface;
+  readonly currentTheme: ITheme;
 }
 
 const ThemesReducer = combineReducers<IThemesState, ThemesAction>({
