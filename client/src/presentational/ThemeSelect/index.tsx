@@ -1,5 +1,5 @@
 import * as React from "react";
-import { darkTheme, lightTheme, ThemeProvider } from "../../theme";
+import { darkTheme, lightTheme, ThemeProvider, getTheme, } from "../../theme";
 import { Button } from "../Button";
 
 const ThemeSelect = (props: any) => {
@@ -13,11 +13,10 @@ const ThemeSelect = (props: any) => {
   return (
     <div>
       <div>theme: {currentTheme.name}</div>
-      <Button>button</Button>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={getTheme('dark')}>
         <Button onClick={changeThemeDark}>dark theme</Button>
       </ThemeProvider>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={getTheme('light')}>
         <Button onClick={changeThemeLight}>light theme</Button>
       </ThemeProvider>
     </div>

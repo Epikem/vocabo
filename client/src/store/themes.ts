@@ -15,13 +15,15 @@ interface IThemesState {
 }
 
 const ThemesReducer = combineReducers<IThemesState, ThemesAction>({
-  currentTheme: (state = lightTheme, action) => {
+  currentTheme: (state = getTheme('dark'), action) => {
     switch (action.type) {
       case CHANGE:
         if (action.payload === 'light') {
-          return lightTheme;
+          return getTheme('light');
         }
-        else { return darkTheme; }
+        else {
+          return getTheme('dark'); 
+        }
       default:
         return state;
     }
