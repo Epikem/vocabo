@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import * as styledComponents from "styled-components";
 import { invert, darken, lighten, transparentize } from "polished";
 
@@ -72,8 +73,37 @@ const darkEffects: themeEffects = {
   },
   invertEffect: (color: string) => {
     return invert(color);
+
+const getTheme = _.memoize(calculateTheme);
+
+/**
+ * returns calculated theme
+ * @param name the theme name. 
+ */
+function calculateTheme(name: themeName) : ITheme{
+
+  // calculated theme
+  let ctheme : ITheme;
+  const primaryColor = name === 'light' ? colors.primary : darken("0.1", invert(colors.primary));
+
+  if(name === 'light'){
+    ctheme = {
+      ...lightTheme,
+      primaryColor,
+    }
+
+  }else {
+    ctheme = {
+      ...darkTheme,
+      primaryColor,
+    }
   }
-};
+
+  return {
+    ...ctheme,
+    fontColor: getLuminance(ctheme.primaryColor) > 0.5 ? 'black' : 'white',
+  };
+}
 
 export const lightTheme: ITheme = {
   navFontColor: transparentize(0.2, darken("0.2", colors.secondary)),
@@ -114,4 +144,4 @@ styled.createGlobalStyle = createGlobalStyle;
 
 export default styled;
 
-export { css, keyframes, ThemeProvider, createGlobalStyle };
+export { css, keyframes, ThemeProvider, createGlobalStyle, getTheme };
