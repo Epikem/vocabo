@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
+import { darken, getLuminance, invert, lighten, transparentize } from "polished";
 import * as styledComponents from "styled-components";
-import { invert, darken, lighten, transparentize } from "polished";
 
 const {
   default: styled,
@@ -111,21 +111,6 @@ export const darkTheme: IStaticTheme = {
     return invert(color);
   },
   ...sharedTheme,
-};
-
-export const theme = (
-  name: themeAttributeKey,
-  ...effects: themeEffectKey[]
-) => {
-  return (props: any) => {
-    let ret = props.theme[name];
-    if (effects) {
-      for (const effect of effects) {
-        ret = props.theme[effect](ret);
-      }
-    }
-    return ret;
-  };
 };
 
 styled.createGlobalStyle = createGlobalStyle;

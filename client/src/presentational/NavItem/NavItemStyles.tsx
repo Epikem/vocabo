@@ -1,25 +1,30 @@
-import { NavLink } from 'react-router-dom';
-import styled, { theme } from '../../theme';
+import { darken, lighten } from "polished";
+import { NavLink } from "react-router-dom";
+import styled, { css } from "../../theme";
 
 export const NavItemBox = styled(NavLink)`
-  padding: .5rem;
-  user-select: none;
-  cursor: pointer;
+  ${({
+    theme: { themeName, fontColor, navFontColor, titleSize, hoverEffect, activeEffect }
+  }) => css`
+    padding: 0.5rem;
+    user-select: none;
+    cursor: pointer;
 
-  color: ${theme('navFontColor')};
-  font-size: ${theme('titleSize')};
-  border-bottom: 2px solid transparent;
-  display: flex;
+    color: ${navFontColor};
+    font-size: ${titleSize};
+    border-bottom: 2px solid transparent;
+    display: flex;
 
-  :hover{
-    border-bottom: 2px solid ${theme('navFontColor')};
-  }
+    :hover {
+      border-bottom: 2px solid ${themeName === 'light' ? darken(0.2, navFontColor) : lighten(0.3, navFontColor)};
+    }
 
-  :hover{
-    color: ${theme('fontColor', 'hoverEffect')};
-  }
+    :hover {
+      color: ${themeName === 'light' ? darken(0.2, navFontColor) : lighten(0.3, navFontColor)};
+    }
 
-  :active{
-    color:${theme('fontColor', 'activeEffect')}
-  }
+    :active {
+      color: ${activeEffect(navFontColor)};
+    }
+  `};
 `;

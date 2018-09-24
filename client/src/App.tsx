@@ -1,18 +1,16 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ThemeSelection, WordSearch } from './containers';
-import { Layout } from './presentational';
-import styled, { ThemeProvider, theme } from './theme';
+import styled, { css, ThemeProvider } from "./theme";
 
 const Global = styled.createGlobalStyle`
-  *{
-    transition: all .15s linear;
-    transition-property: box-shadow, border-color, height, width, background-color, font-size, color;
+  ${({ theme: { fontColor, primaryColor, } }) => css`
+    * {
+      transition: all 0.15s linear;
+      transition-property: box-shadow, border-color, height, width,
+        background-color, font-size, color;
   }
 
-  div, p{
-    color: inherit;
+    div,
+    p {
+      color: ${fontColor};
   }
   
   a {
@@ -20,10 +18,11 @@ const Global = styled.createGlobalStyle`
     color: inherit;
   }
 
-  body{
-    color: ${theme('fontColor')};
-    background-color: ${theme('primaryColor', 'activeEffect')};
+    body {
+      color: ${fontColor};
+      background-color: ${transparentize(0.1, primaryColor)};
   }
+  `};
 `;
 
 
