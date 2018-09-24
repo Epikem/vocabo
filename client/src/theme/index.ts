@@ -65,24 +65,22 @@ function calculateTheme(name: themeName) : ITheme{
   // calculated theme
   let ctheme : ITheme;
   const primaryColor = name === 'light' ? colors.primary : darken("0.1", invert(colors.primary));
-
+  const fontColor = getLuminance(primaryColor) > 0.5 ? 'black' : 'white';
   if(name === 'light'){
     ctheme = {
       ...lightTheme,
+      fontColor,
       primaryColor,
     }
-
-  }else {
+  } else {
     ctheme = {
       ...darkTheme,
+      fontColor,
       primaryColor,
     }
   }
 
-  return {
-    ...ctheme,
-    fontColor: getLuminance(ctheme.primaryColor) > 0.5 ? 'black' : 'white',
-  };
+  return ctheme;
 }
 
 export const lightTheme: IStaticTheme = {
