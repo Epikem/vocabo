@@ -1,3 +1,9 @@
+import { transparentize } from "polished";
+import * as React from "react";
+import { connect } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ThemeSelection, WordSearch } from "./containers";
+import { Layout } from "./presentational";
 import styled, { css, ThemeProvider } from "./theme";
 
 const Global = styled.createGlobalStyle`
