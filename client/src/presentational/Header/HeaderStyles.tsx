@@ -1,8 +1,8 @@
-import { darken, lighten, desaturate } from 'polished';
-import styled, { theme } from '../../theme';
+import { lighten } from 'polished';
+import styled from '../../theme';
 
 const HeaderBox = styled.div`
-  background-color: ${props => lighten(0.1,props.theme.primaryColor)};
+  background-color: ${props => lighten(0.1, props.theme.primaryColor)};
 `
 
 const LogoBox = styled.div`

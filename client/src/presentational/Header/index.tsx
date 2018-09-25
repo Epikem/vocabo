@@ -1,7 +1,7 @@
 import * as React from "react";
-import { HeaderBox, LogoBox } from "./HeaderStyles";
 import { FlexBox } from "../FlexBox";
 import { NavItem } from "../NavItem";
+import { HeaderBox, LogoBox } from "./HeaderStyles";
 
 interface IHeaderProps {}
 

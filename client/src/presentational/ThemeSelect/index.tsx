@@ -1,6 +1,6 @@
 import { getLuminance } from "polished";
 import * as React from "react";
-import { darkTheme, getTheme, lightTheme, ThemeProvider, } from "../../theme";
+import { getTheme, ThemeProvider, } from "../../theme";
 import { Button } from "../Button";
 
 const ThemeSelect = (props: any) => {
