@@ -4,7 +4,7 @@ import styled, { css } from "../../theme";
 
 export const NavItemBox = styled(NavLink)`
   ${({
-    theme: { themeName, fontColor, navFontColor, titleSize, hoverEffect, activeEffect }
+    theme: { navFontColor, titleSize, hoverEffect }
   }) => css`
     padding: 0.5rem;
     user-select: none;
@@ -16,15 +16,11 @@ export const NavItemBox = styled(NavLink)`
     display: flex;
 
     :hover {
-      border-bottom: 2px solid ${themeName === 'light' ? darken(0.2, navFontColor) : lighten(0.3, navFontColor)};
+      border-bottom: 2px solid ${hoverEffect(navFontColor)};
     }
 
     :hover {
-      color: ${themeName === 'light' ? darken(0.2, navFontColor) : lighten(0.3, navFontColor)};
-    }
-
-    :active {
-      color: ${activeEffect(navFontColor)};
+      color: ${hoverEffect(navFontColor)};
     }
   `};
 `;

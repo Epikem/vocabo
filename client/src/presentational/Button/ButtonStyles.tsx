@@ -1,9 +1,9 @@
-import { darken, lighten } from 'polished';
-import styled from '../../theme';
+import { darken, invert, lighten, transparentize } from 'polished';
+import styled, { css } from '../../theme';
 
-const ButtonBox = styled.button`
+const ButtonBox = styled.button`${({ theme }) => css`
   background-color: ${props => props.theme.primaryColor};
-  border: 1px solid ${props => darken(0.1, props.theme.primaryColor)};
+  border: 1px solid ${theme.borderColor};
   padding: .5rem;
   color: ${props => props.theme.fontColor};
   font-size: ${props => props.theme.fontSize};
@@ -12,13 +12,13 @@ const ButtonBox = styled.button`
 
   :hover{
     transition: background-color .15s linear;
-    background-color: ${props => lighten(0.1, props.theme.primaryColor)};
+    background-color: ${theme.hoverEffect(theme.primaryColor)};
   }
 
   :active{
     transition: background-color .01s linear;
-    background-color: ${props => darken(0.1, props.theme.primaryColor)};
+    background-color: ${theme.activeEffect(theme.primaryColor)};
   }
-`
+`}`
 
 export { ButtonBox };

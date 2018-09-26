@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { darken, getLuminance, invert, lighten, transparentize } from "polished";
+import { darken, getLuminance, invert, lighten, setLightness, transparentize } from "polished";
 import * as styledComponents from "styled-components";
 
 const {
@@ -22,17 +22,18 @@ interface IStaticTheme {
   headerHeight: string;
   titleSize: string;
   boxShadow: string;
-  navFontColor: string;
   fontSize: string;
   themeName: themeName;
-
+  
   sharedEffect1: Effect;
   activeEffect: Effect;
   hoverEffect: Effect;
   invertEffect: Effect;
-
+  
+  borderColor?: string;
   primaryColor?: string;
   fontColor?: string;
+  navFontColor?: string;
   highlightEffect?: Effect;
 }
 
@@ -41,10 +42,10 @@ export interface ITheme extends Required<IStaticTheme> {}
 // color scheme : https://coolors.co/ffc093-ede580-a4af69-a5d37a-8aa399
 
 const sharedTheme = {
-  headerHeight: "100%",
-  titleSize: "30px",
   boxShadow: `0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)}`,
-  sharedEffect1:(str:string)=>'test'
+  headerHeight: "100%",
+  sharedEffect1:(str:string)=>'test',
+  titleSize: "30px",
 };
 
 const colors = {
@@ -65,7 +66,8 @@ function calculateTheme(name: themeName) : ITheme{
 
   // calculated theme
   let ctheme : ITheme;
-  const primaryColor = name === 'light' ? colors.primary : darken("0.1", invert(colors.primary));
+  const primaryColor = name === 'light' ? lighten(0.1, colors.primary) : setLightness(0.05, colors.primary);
+  const secondaryColor = name === 'light' ? lighten(0.1, colors.secondary) : setLightness(0.05, colors.secondary);
   const isBrightTheme = getLuminance(primaryColor) > 0.5;
   const fontColor = isBrightTheme ? 'black' : 'white';
   const highlightEffect = isBrightTheme ? (amount: number, color: string) => {
@@ -73,12 +75,16 @@ function calculateTheme(name: themeName) : ITheme{
   } : (amount: number, color: string) => {
     return lighten(amount, color);
   };
+  const borderColor = transparentize(0.4, highlightEffect(0.4, secondaryColor));
+  const navFontColor = highlightEffect(0.4, secondaryColor);
   if(name === 'light'){
     ctheme = {
       ...lightTheme,
       fontColor,
       primaryColor,
       highlightEffect,
+      borderColor,
+      navFontColor,
     }
   } else {
     ctheme = {
@@ -86,6 +92,8 @@ function calculateTheme(name: themeName) : ITheme{
       fontColor,
       primaryColor,
       highlightEffect,
+      borderColor,
+      navFontColor,
     }
   }
 
@@ -93,10 +101,9 @@ function calculateTheme(name: themeName) : ITheme{
 }
 
 export const lightTheme: IStaticTheme = {
-  navFontColor: transparentize(0.2, darken("0.2", colors.secondary)),
   fontSize: "15px",
   themeName: "light",
-  activeEffect: (color: string) => lighten(0.2, color),
+  activeEffect: (color: string) => lighten(0.1, color),
   hoverEffect: (color: string) => {
     return darken(0.2, color);
   },
@@ -107,14 +114,13 @@ export const lightTheme: IStaticTheme = {
 };
 
 export const darkTheme: IStaticTheme = {
-  navFontColor: transparentize(0.2, lighten("0.2", invert(colors.secondary))),
   fontSize: "15px",
   themeName: "dark",
   activeEffect: (color: string) => {
-    return darken(0.3, color);
+    return darken(0.1, color);
   },
   hoverEffect: (color: string) => {
-    return lighten(0.3, color);
+    return lighten(0.2, color);
   },
   invertEffect: (color: string) => {
     return invert(color);

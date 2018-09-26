@@ -7,7 +7,7 @@ import { Layout } from "./presentational";
 import styled, { css, ThemeProvider } from "./theme";
 
 const Global = styled.createGlobalStyle`
-  ${({ theme: { fontColor, primaryColor, } }) => css`
+  ${({ theme: { fontColor, primaryColor, highlightEffect } }) => css`
     * {
       transition: all 0.15s linear;
       transition-property: box-shadow, border-color, height, width,
@@ -26,7 +26,7 @@ const Global = styled.createGlobalStyle`
 
     body {
       color: ${fontColor};
-      background-color: ${transparentize(0.1, primaryColor)};
+      background-color: ${highlightEffect(-0.1, primaryColor)};
     }
   `};
 `;
