@@ -12,7 +12,7 @@ const {
 ITheme
 >;
 
-type Effect = (color: string) => string;
+type Effect = (...args:Array<number|string>) => string;
 
 type themeName = 
   | "light"
@@ -33,6 +33,7 @@ interface IStaticTheme {
 
   primaryColor?: string;
   fontColor?: string;
+  highlightEffect?: Effect;
 }
 
 export interface ITheme extends Required<IStaticTheme> {}
@@ -65,18 +66,26 @@ function calculateTheme(name: themeName) : ITheme{
   // calculated theme
   let ctheme : ITheme;
   const primaryColor = name === 'light' ? colors.primary : darken("0.1", invert(colors.primary));
-  const fontColor = getLuminance(primaryColor) > 0.5 ? 'black' : 'white';
+  const isBrightTheme = getLuminance(primaryColor) > 0.5;
+  const fontColor = isBrightTheme ? 'black' : 'white';
+  const highlightEffect = isBrightTheme ? (amount: number, color: string) => {
+    return darken(amount, color);
+  } : (amount: number, color: string) => {
+    return lighten(amount, color);
+  };
   if(name === 'light'){
     ctheme = {
       ...lightTheme,
       fontColor,
       primaryColor,
+      highlightEffect,
     }
   } else {
     ctheme = {
       ...darkTheme,
       fontColor,
       primaryColor,
+      highlightEffect,
     }
   }
 
