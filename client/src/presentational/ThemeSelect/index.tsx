@@ -14,6 +14,7 @@ const ThemeSelect = (props: any) => {
   return (
     <div>
       <div>theme: {currentTheme.name}</div>
+      <Button>current theme</Button>
       <ThemeProvider theme={getTheme('dark')}>
         <Button onClick={changeThemeDark}>dark theme</Button>
       </ThemeProvider>
