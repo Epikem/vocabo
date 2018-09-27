@@ -19,16 +19,18 @@ const rootReducer = combineReducers({
   theme: ThemesReducer
 });
 
+
 function configureStore(initialState?: object) {
   // compose enhancers
   // const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
+  /* tslint:disable-next-line */
+  const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
+
   // create store
-  // return createStore(rootReducer, initialState!, enhancer);
-  return createStore(rootReducer, initialState!);
+  return enhancer(rootReducer, initialState!);
 }
 
-// pass an optional param to rehydrate state on app start
 const store = configureStore();
 
 // export store singleton instance
