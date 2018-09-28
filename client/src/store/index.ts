@@ -3,12 +3,12 @@ import { CountersAction, CountersReducer } from "./counters";
 import { ThemesAction, ThemesReducer } from "./themes";
 
 import { StateType } from "typesafe-actions";
+import { SearchAction, SearchReducer, } from "./search";
 // import { RouterAction, LocationChangeAction } from 'react-router-redux';
 // type ReactRouterAction = RouterAction | LocationChangeAction;
 
 export type RootState = StateType<typeof rootReducer>;
-// export type RootAction = ReactRouterAction | CountersAction;
-export type RootAction = CountersAction | ThemesAction;
+export type RootAction = CountersAction | ThemesAction | SearchAction;
 
 // import { composeEnhancers } from './utils';
 // import { routerReducer } from 'react-router-redux';
@@ -16,7 +16,8 @@ export type RootAction = CountersAction | ThemesAction;
 const rootReducer = combineReducers({
   // router: routerReducer,
   counter: CountersReducer,
-  theme: ThemesReducer
+  search: SearchReducer,
+  theme: ThemesReducer,
 });
 
 
@@ -28,6 +29,7 @@ function configureStore(initialState?: object) {
   const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
 
   // create store
+  // return createStore(rootReducer, initialState!, enhancer);
   return enhancer(rootReducer, initialState!);
 }
 
