@@ -1,12 +1,16 @@
-import * as React from 'react';
-import { Button } from '../presentational';
+import * as React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
+import { Button } from "../presentational";
+import { RootState } from "../store";
+import { SearchActions, SearchState } from '../store/search';
 
-class WordSearch extends React.Component<any, any>{
-  public state = {
+type propTypes = typeof SearchActions & typeof SearchState;
 
-  }
+class WordSearch extends React.Component<propTypes, any> {
+  public state = {};
 
-  public constructor(props: any) {
+  public constructor(props: propTypes) {
     super(props);
     return this;
   }
@@ -15,15 +19,27 @@ class WordSearch extends React.Component<any, any>{
     return (
       <div>
         WordSearch
-        <Button>
-          <div>
-            test button
-          </div>
-        </Button>
+        <ul>
+          {this.props.result.map(e=>{
+            return <li key={e.id}>{e.Korean} : {e.English}</li>;
+          })}
+        </ul>
+        <Button>test button</Button>
+        <input onChange={this.handleChangeSearchText} value={this.props.searchText} />
       </div>
-    )
+    );
+  }
 
+  private handleChangeSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.props.changeSearchText({searchText: e.target.value});
   }
 }
 
-export default WordSearch;
+export default connect(
+  (state: RootState) => ({
+    result: state.search.result
+  }),
+  (dispatch: Dispatch) => bindActionCreators({
+    changeSearchText: SearchActions.changeSearchText,
+  }, dispatch)
+)(WordSearch);
