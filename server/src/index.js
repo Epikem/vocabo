@@ -36,7 +36,8 @@ app.get('/translate/:from/:to/:queryString', function (req, res) {
 
 app.get(`/search/autocomplete/en/:query`, (req, res)=>{
     var query = req.params.query;
-    var api_url = `https://ac.dict.naver.com/enendict/ac?_callback=window.__jindo2_callback.$2414&q=${query}&q_enc=utf-8&st=11001&r_format=json&r_enc=utf-8&r_lt=11001&r_unicode=0&r_escape=1`;
+    var api_url = encodeURI(`https://ac.dict.naver.com/enendict/ac?_callback=window.__jindo2_callback.$2414&q=${query}&q_enc=utf-8&st=11001&r_format=json&r_enc=utf-8&r_lt=11001&r_unicode=0&r_escape=1`);
+    
     var options = {
         url: api_url,
     };
