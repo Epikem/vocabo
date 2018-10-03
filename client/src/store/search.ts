@@ -51,10 +51,6 @@ type word = languageMap & {
   id: number;
 };
 
-type wordList = {
-  list: word[];
-};
-
 type filter = {
   value: string;
   options: {
@@ -66,6 +62,7 @@ type SearchState = {
   searchText: string;
   filters: filter[];
   result: word[];
+  fetchStatus: string;
 };
 
 const initialResult: word[] = [
@@ -85,6 +82,7 @@ const SearchState : SearchState = {
   searchText: '',
   filters: [],
   result: initialResult,
+  fetchStatus: ''
 }
 
 const SearchReducer = combineReducers<SearchState, SearchAction>({
