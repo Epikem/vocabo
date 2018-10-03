@@ -4,6 +4,9 @@ import { action as typedAction, ActionType, createStandardAction } from "typesaf
 type SearchActionKey =
   | "search/list/get"
   | "search/list/getautocompletelist"
+  | "search/result/request"
+  | "search/result/success"
+  | "search/result/failure"
   | "search/searchText/change"
   | "search/filters/add"
   | "search/filters/remove"
@@ -17,14 +20,25 @@ const changeSearchText = createSearchAction('search/searchText/change')<{ search
 
 const getAutocompleteList = createSearchAction('search/list/getautocompletelist')<SearchState>();
 
+const requestSearch = createSearchAction('search/result/request')<{ searchText: string }>();
+
+const processSearchSuccess = createSearchAction('search/result/success')<{ result: word[] }>();
+
+const processSearchFailure = createSearchAction('search/result/failure')<{ fetchStatus: string }>();
+
 const addSearchFilter = (filter: filter) => {
   typedAction('search/filters/add', filter)
 };
 
-export const SearchActions = {
+type SearchActions = typeof SearchActions;
+
+const SearchActions = {
   addSearchFilter,
   changeSearchText,
   getAutocompleteList,
+  requestSearch,
+  processSearchSuccess,
+  processSearchFailure,
 }
 
 type SearchActionType = ActionType<typeof SearchActions>;
