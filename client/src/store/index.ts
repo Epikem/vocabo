@@ -1,6 +1,5 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import { CountersAction, CountersReducer } from "./counters";
-import { ThemesAction, ThemesReducer } from "./themes";
+import { CountersActionType, CountersReducer } from "./counters";
+import { ThemesActionType, ThemesReducer } from "./themes";
 
 import { StateType } from "typesafe-actions";
 import { SearchAction, SearchReducer, } from "./search";
@@ -8,7 +7,7 @@ import { SearchAction, SearchReducer, } from "./search";
 // type ReactRouterAction = RouterAction | LocationChangeAction;
 
 export type RootState = StateType<typeof rootReducer>;
-export type RootAction = CountersAction | ThemesAction | SearchAction;
+export type RootAction = CountersActionType | ThemesActionType | SearchActionType;
 
 // import { composeEnhancers } from './utils';
 // import { routerReducer } from 'react-router-redux';

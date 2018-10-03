@@ -27,7 +27,7 @@ export const SearchActions = {
   getAutocompleteList,
 }
 
-type SearchAction = ActionType<typeof SearchActions>;
+type SearchActionType = ActionType<typeof SearchActions>;
 
 type language = "English" | "Korean";
 
