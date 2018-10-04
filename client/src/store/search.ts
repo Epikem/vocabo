@@ -1,4 +1,4 @@
-import { Action, combineReducers } from "redux";
+import { createLogic } from 'redux-logic';
 import { action as typedAction, ActionType, createStandardAction } from "typesafe-actions";
 
 type SearchActionKey =
@@ -85,52 +85,78 @@ const SearchState : SearchState = {
   fetchStatus: ''
 }
 
-const SearchReducer = combineReducers<SearchState, SearchAction>({
-  searchText: (state = '', action) => {
-    switch (action.type) {
-      case 'search/searchText/change':
-        return action.payload.searchText;
-      default:
-        return state;
-    }
-  },
-  filters: (state = [], action) => [],
-  result: (state = initialResult, action) => {
-    switch (action.type) {
-      case 'search/list/getautocompletelist':
-        // action.payload.
-        break;
+/**
+ * SearchLogic fetches search result from backend server 
+ * and maps the result to search state
+ */
+const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
+  // using any for not important third party library usage
+  type: 'search/result/request',
+  debounce: 500, /* ms */
+  latest: true,  /* take latest only */
 
-      default:
-        break;
+  /* let's prevent empty requests */
+  validate({ getState, action }, allow, reject: any) {
+    if (action.payload) {
+      allow(action);
+    } else {  /* empty request, silently reject */
+      reject();
     }
-    return state;
   },
+
+  // use axios injected as httpClient from configureStore logic deps
+  process({ httpClient, getState, action } : any, dispatch : any, done: any) {
+      const query = action.payload.searchText;
+      const apiurl = `/search/autocomplete/en/${query}`;
+      const res = httpClient.get(apiurl);
+      const isEnglishQuery = /^[a-zA-Z0-9()]+$/.test(query);
+    
+      res.then((v: any)=>{
+        // console.log(v.data);
+        const data : string = v.data;
+        const datastart = data.indexOf('{');
+        const dataend = data.lastIndexOf('}');
+        const parsed = JSON.parse(data.substr(datastart, dataend - datastart + 1));
+
+        // parsed word map
+        const mapped: word[] = [];
+        let i = 0;
+        const arr = [];
+        for(const list of parsed.items){
+          arr.push(...list);
+        }
+        for (const pair of arr) {
+          if(isEnglishQuery){
+            mapped.push({
+              id:i,
+              English: pair[0],
+              Korean: pair[1],
+            })
+          } else {
+            mapped.push({
+              id:i,
+              English: pair[1],
+              Korean: pair[0],
+            })
+          }
+          i+=1;
+        }
+        
+        // console.log(mapped);
+        return mapped;
+      }).then((mapped: word[]) => {
+        const result = {
+          result: mapped
+        }
+        // console.log(mapped);
+        dispatch(processSearchSuccess(result));
+      }).catch((err: any) => {
+        console.error(err); // might be a render err
+        dispatch(processSearchFailure(err))
+      })
+      .then(() => done()); // call done when finished dispatching
+  }
 });
-
-export { SearchReducer, SearchState, SearchAction };
-
-// import axios from 'axios';
-
-// const query = searchText;
-// const api_url = `https://ac.dict.naver.com/enendict/ac?_callback=window.__jindo2_callback.$2414&q=${query}&q_enc=utf-8&st=11001&r_format=json&r_enc=utf-8&r_lt=11001&r_unicode=0&r_escape=1`;
-// const options = {
-//     url: api_url,
-// };
-
-// axios.get(api_url, function (error, response, body) {
-//     if (!error && response.statusCode === 200) {
-//         res.writeHead(200, {
-//             'Content-Type': 'text/json;charset=utf-8'
-//         });
-//         res.end(body);
-//     } else {
-//         res.status(response.statusCode).end();
-//         console.log('error = ' + response.statusCode);
-//     }
-// });
-
-// const res = axios.get(api_url);
 
 const SearchReducer = function reducer(state = SearchState, action:SearchActionType) {
   switch(action.type) {
