@@ -132,3 +132,32 @@ export { SearchReducer, SearchState, SearchAction };
 
 // const res = axios.get(api_url);
 
+const SearchReducer = function reducer(state = SearchState, action:SearchActionType) {
+  switch(action.type) {
+  case 'search/searchText/change':
+    return {
+      ...state,
+      searchText: action.payload.searchText,
+    }
+  case 'search/result/request':
+    return {
+      ...state,
+      fetchStatus: `fetching for ${action.payload}... ${(new Date()).toLocaleString()}`,
+    };
+  case 'search/result/success':
+    return {
+      ...state,
+      result: action.payload.result,
+      fetchStatus: `Results from ${(new Date()).toLocaleString()}`
+    };
+  case 'search/result/failure':
+    return {
+      ...state,
+      fetchStatus: `errored: ${action.payload}`
+    };
+  default:
+    return state;
+  }
+}
+
+export { SearchActions, SearchState, SearchActionType, SearchReducer, SearchLogic };
