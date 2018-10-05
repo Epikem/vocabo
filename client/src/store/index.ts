@@ -3,6 +3,8 @@ import { CountersActionType, CountersReducer } from "./counters";
 import { ThemesActionType, ThemesReducer } from "./themes";
 
 import { StateType } from "typesafe-actions";
+import { SearchActionType, SearchLogic ,SearchReducer } from "./search";
+
 import axios from 'axios';
 import { createLogicMiddleware } from 'redux-logic';
 
@@ -22,6 +24,9 @@ const rootReducer = combineReducers({
   theme: ThemesReducer,
 });
 
+const rootLogic = [
+  SearchLogic
+];
 
 const deps = { httpClient: axios };
 
