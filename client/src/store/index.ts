@@ -1,8 +1,11 @@
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { CountersActionType, CountersReducer } from "./counters";
 import { ThemesActionType, ThemesReducer } from "./themes";
 
 import { StateType } from "typesafe-actions";
-import { SearchAction, SearchReducer, } from "./search";
+import axios from 'axios';
+import { createLogicMiddleware } from 'redux-logic';
+
 // import { RouterAction, LocationChangeAction } from 'react-router-redux';
 // type ReactRouterAction = RouterAction | LocationChangeAction;
 
@@ -20,19 +23,35 @@ const rootReducer = combineReducers({
 });
 
 
-function configureStore(initialState?: object) {
-  // compose enhancers
-  // const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+const deps = { httpClient: axios };
 
-  /* tslint:disable-next-line */
-  const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
+const logicMiddleware = createLogicMiddleware(rootLogic, deps);
 
-  // create store
-  // return createStore(rootReducer, initialState!, enhancer);
-  return enhancer(rootReducer, initialState!);
-}
+const middleware = applyMiddleware(logicMiddleware);
 
-const store = configureStore();
+/* tslint:disable-next-line */
+const enhancer = (window['devToolsExtension'] !== 'undefined') ?
+  compose(
+    middleware,
+/* tslint:disable-next-line */
+    window['devToolsExtension']()
+  ) : middleware;
+
+const store = createStore(rootReducer, enhancer);
+
+// function configureStore(initialState?: object) {
+//   // compose enhancers
+//   // const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+
+//   /* tslint:disable-next-line */
+//   const enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
+
+//   // create store
+//   // return createStore(rootReducer, initialState!, enhancer);
+//   return enhancer(rootReducer, initialState!);
+// }
+
+// const store = configureStore();
 
 // export store singleton instance
 export default store;
