@@ -32,15 +32,18 @@ class WordSearch extends React.Component<propTypes, any> {
   }
 
   private handleChangeSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.changeSearchText({searchText: e.target.value});
+    this.props.changeSearchText({searchText: e.currentTarget.value});
+    this.props.requestSearch({searchText: e.currentTarget.value});
   }
 }
 
 export default connect(
   (state: RootState) => ({
-    result: state.search.result
+    result: state.search.result,
+    searchText: state.search.searchText,
   }),
-  (dispatch: Dispatch) => bindActionCreators({
+  (dispatch) => bindActionCreators({
     changeSearchText: SearchActions.changeSearchText,
+    requestSearch: SearchActions.requestSearch,
   }, dispatch)
 )(WordSearch);
