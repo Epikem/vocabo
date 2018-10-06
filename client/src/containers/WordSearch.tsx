@@ -20,6 +20,7 @@ class WordSearch extends React.Component<propTypes, any> {
       <div>
         WordSearch
         <ul>
+          <li>Korean | English</li>
           {this.props.result.map(e=>{
             return <li key={e.id}>{e.Korean} : {e.English}</li>;
           })}
