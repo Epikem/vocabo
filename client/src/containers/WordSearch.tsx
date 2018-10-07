@@ -5,12 +5,26 @@ import { Button } from "../presentational";
 import { RootState } from "../store";
 import { SearchActions, SearchState } from '../store/search';
 
-type propTypes = typeof SearchActions & typeof SearchState;
+type OwnProps = {};
 
-class WordSearch extends React.Component<propTypes, any> {
+type StateProps = {
+  result: SearchState['result'];
+  searchText: SearchState['searchText'];
+};
+
+type DispatchProps = {
+  changeSearchText: SearchActions['changeSearchText'];
+  requestSearch: SearchActions['requestSearch'];
+}
+
+type Props = StateProps & DispatchProps & OwnProps;
+
+type State = { };
+
+class WordSearch extends React.Component<Props, State> {
   public state = {};
 
-  public constructor(props: propTypes) {
+  public constructor(props: Props) {
     super(props);
     return this;
   }
