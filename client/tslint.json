@@ -13,7 +13,8 @@
       "allow-tagged-template"
     ],
     "interface-over-type-literal": false,
-    "object-literal-sort-keys":false
+    "object-literal-sort-keys":false,
+    "interface-name":false
   },
   "defaultSeverity": "warn"
 }
