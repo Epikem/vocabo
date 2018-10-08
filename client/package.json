@@ -73,6 +73,7 @@
     "@types/react-dom": "^16.0.7",
     "@types/react-redux": "^6.0.6",
     "@types/react-router-dom": "^4.3.0",
+    "@types/styled-components": "^4.0.1",
     "typescript": "^3.0.1"
   },
   "jest": {
