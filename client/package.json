@@ -62,7 +62,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "watch": "nodemon --watch src scripts/start.js",
     "lint": "tslint -p .",
-    "lint:fix": "tslint -p . --fix"
+    "lint:fix": "tslint -p . --fix",
+    "tsc":"tsc"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
