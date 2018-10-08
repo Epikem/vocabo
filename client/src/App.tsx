@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeSelection, WordSearch } from "./containers";
 import { Layout } from "./presentational";
-import styled, { css, ThemeProvider } from "./theme";
+import { createGlobalStyle, css, ThemeProvider } from "./theme";
 
-const Global = styled.createGlobalStyle`
+const Global = createGlobalStyle`
   ${({ theme: { fontColor, primaryColor, highlightEffect } }) => css`
     * {
       transition: all 0.15s linear;

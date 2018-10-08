@@ -12,6 +12,7 @@ const {
 ITheme
 >;
 
+
 type Effect = (...args:Array<number|string>) => string;
 
 type themeName = 
@@ -127,8 +128,6 @@ export const darkTheme: IStaticTheme = {
   },
   ...sharedTheme,
 };
-
-styled.createGlobalStyle = createGlobalStyle;
 
 export default styled;
 
