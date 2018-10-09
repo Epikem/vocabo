@@ -7,14 +7,16 @@ import { Layout } from "./presentational";
 import { createGlobalStyle, css, ThemeProvider } from "./theme";
 
 const Global = createGlobalStyle`
-  ${({ theme: { fontColor, primaryColor, highlightEffect } }) => css`
-    * {
-      transition: all 0.15s linear;
+  ${({ theme: { fontColor, primaryColor, highlightEffect, fontSize } }) => css`
+    div {
+      color: ${fontColor};
+      background-color: inherit;
+      font-size: ${fontSize};
+    }
       transition-property: box-shadow, border-color, height, width,
         background-color, font-size, color;
     }
 
-    div,
     p {
       color: ${fontColor};
     }
