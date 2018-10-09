@@ -13,6 +13,9 @@ const Global = createGlobalStyle`
       background-color: inherit;
       font-size: ${fontSize};
     }
+
+    div, input, p, a, button, body {
+      transition: all .15s linear;
       transition-property: box-shadow, border-color, height, width,
         background-color, font-size, color;
     }
