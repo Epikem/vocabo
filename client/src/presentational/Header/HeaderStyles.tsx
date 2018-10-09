@@ -7,8 +7,6 @@ const HeaderBox = styled.div`${({ theme }) => css`
 `}`;
 
 const LogoBox = styled.div`
-  transition: all .15s linear;
-  transition-property: box-shadow, height, width, background-color, font-size, color;
   display: flex;
 `
 
