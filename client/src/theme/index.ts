@@ -9,22 +9,22 @@ const {
   ThemeProvider,
   createGlobalStyle,
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<
-ITheme
+Theme
 >;
 
 
 type Effect = (...args:Array<number|string>) => string;
 
-type themeName = 
+type ThemeName = 
   | "light"
   | "dark";
 
-interface IStaticTheme {
+interface StaticTheme {
   headerHeight: string;
   titleSize: string;
   boxShadow: string;
   fontSize: string;
-  themeName: themeName;
+  themeName: ThemeName;
   
   sharedEffect1: Effect;
   activeEffect: Effect;
@@ -38,7 +38,7 @@ interface IStaticTheme {
   highlightEffect?: Effect;
 }
 
-export interface ITheme extends Required<IStaticTheme> {}
+export interface Theme extends Required<StaticTheme> {}
 
 // color scheme : https://coolors.co/ffc093-ede580-a4af69-a5d37a-8aa399
 
@@ -63,10 +63,10 @@ const getTheme = _.memoize(calculateTheme);
  * returns calculated theme
  * @param name the theme name. 
  */
-function calculateTheme(name: themeName) : ITheme{
+function calculateTheme(name: ThemeName) : Theme{
 
   // calculated theme
-  let ctheme : ITheme;
+  let ctheme : Theme;
   const primaryColor = name === 'light' ? lighten(0.1, colors.primary) : setLightness(0.05, colors.primary);
   const secondaryColor = name === 'light' ? lighten(0.1, colors.secondary) : setLightness(0.05, colors.secondary);
   const isBrightTheme = getLuminance(primaryColor) > 0.5;
@@ -114,7 +114,7 @@ export const lightTheme: IStaticTheme = {
   ...sharedTheme,
 };
 
-export const darkTheme: IStaticTheme = {
+export const darkTheme: StaticTheme = {
   fontSize: "15px",
   themeName: "dark",
   activeEffect: (color: string) => {
