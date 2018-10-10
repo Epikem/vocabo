@@ -43,12 +43,12 @@ class App extends React.Component<any> {
       <ThemeProvider theme={currentTheme}>
         <BrowserRouter>
           <Layout>
-            <div>
+            <>
               <Switch>
                 <Route exact={true} path={"/"} component={WordSearch} />
                 <Route path={"/theme"} component={ThemeSelection} />
               </Switch>
-            </div>
+            </>
             <Global />
           </Layout>
         </BrowserRouter>

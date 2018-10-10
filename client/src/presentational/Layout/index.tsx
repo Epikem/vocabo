@@ -7,9 +7,9 @@ interface ILayoutProps {
 
 export const Layout: React.SFC<ILayoutProps> = (props) => {
   return (
-    <div>
+    <>
       <Header/>
       {props.children}
-    </div>
+    </>
   );
 };
