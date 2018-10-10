@@ -22,11 +22,11 @@ const getAutocompleteList = createSearchAction('search/list/getautocompletelist'
 
 const requestSearch = createSearchAction('search/result/request')<{ searchText: string }>();
 
-const processSearchSuccess = createSearchAction('search/result/success')<{ result: word[] }>();
+const processSearchSuccess = createSearchAction('search/result/success')<{ result: Word[] }>();
 
 const processSearchFailure = createSearchAction('search/result/failure')<{ fetchStatus: string }>();
 
-const addSearchFilter = (filter: filter) => {
+const addSearchFilter = (filter: Filter) => {
   typedAction('search/filters/add', filter)
 };
 
@@ -43,29 +43,29 @@ const SearchActions = {
 
 type SearchActionType = ActionType<typeof SearchActions>;
 
-type language = "English" | "Korean";
+type Language = "English" | "Korean";
 
-type languageMap = { [T in language]: string };
+type LanguageMap = { [T in Language]: string };
 
-type word = languageMap & {
+export type Word = LanguageMap & {
   id: number;
 };
 
-type filter = {
+type Filter = {
   value: string;
   options: {
-    filterLang: language;
+    filterLang: Language;
   };
 };
 
 type SearchState = {
   searchText: string;
-  filters: filter[];
-  result: word[];
+  filters: Filter[];
+  result: Word[];
   fetchStatus: string;
 };
 
-const initialResult: word[] = [
+const initialResult: Word[] = [
   {
     id: 0,
     English: 'hello',
@@ -119,7 +119,7 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
         const parsed = JSON.parse(data.substr(datastart, dataend - datastart + 1));
 
         // parsed word map
-        const mapped: word[] = [];
+        const mapped: Word[] = [];
         let i = 0;
         const arr = [];
         for(const list of parsed.items){
@@ -144,7 +144,7 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
         
         // console.log(mapped);
         return mapped;
-      }).then((mapped: word[]) => {
+      }).then((mapped: Word[]) => {
         const result = {
           result: mapped
         }
