@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { darken, getLuminance, invert, lighten, setLightness, transparentize } from "polished";
+import { darken, getLuminance, invert as invertColor, lighten, setLightness, transparentize } from "polished";
 import * as styledComponents from "styled-components";
 
 const {
@@ -102,7 +102,44 @@ function calculateTheme(name: ThemeName) : Theme{
   return ctheme;
 }
 
-export const lightTheme: IStaticTheme = {
+// example css function 1
+export function truncate(width: string | number) {
+  return css`
+    width: ${width};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `;
+}
+
+export function invertBox(theme: Theme){
+  return css`
+    ${invertColor
+    ? css`
+        border: 0;
+        color: ${theme.fontColor};
+        background-color: transparent;
+      `
+    : css``};
+    `;
+}
+
+// example css function 2
+export const media = {
+  handheld: (args:TemplateStringsArray) => css`
+    @media (max-width: 420px) {
+      ${ css(args) }
+    }
+  `
+}
+
+// // Usage example
+// const Box = styled.div`
+//   ${ truncate('250px') }
+//   background: papayawhip;
+// `;
+
+export const lightTheme: StaticTheme = {
   fontSize: "15px",
   themeName: "light",
   activeEffect: (color: string) => lighten(0.1, color),
@@ -110,7 +147,7 @@ export const lightTheme: IStaticTheme = {
     return darken(0.2, color);
   },
   invertEffect: (color: string) => {
-    return invert(color);
+    return invertColor(color);
   },
   ...sharedTheme,
 };
@@ -125,7 +162,7 @@ export const darkTheme: StaticTheme = {
     return lighten(0.2, color);
   },
   invertEffect: (color: string) => {
-    return invert(color);
+    return invertColor(color);
   },
   ...sharedTheme,
 };
