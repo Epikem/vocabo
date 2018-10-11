@@ -78,23 +78,24 @@ function calculateTheme(name: ThemeName) : Theme{
   };
   const borderColor = transparentize(0.4, highlightEffect(0.4, secondaryColor));
   const navFontColor = highlightEffect(0.4, secondaryColor);
-  if(name === 'light'){
-    ctheme = {
-      ...lightTheme,
+
+  const dynamic = {
       fontColor,
       primaryColor,
       highlightEffect,
       borderColor,
       navFontColor,
     }
+
+  if(name === 'light'){
+    ctheme = {
+      ...lightTheme,
+      ...dynamic,
+    }
   } else {
     ctheme = {
       ...darkTheme,
-      fontColor,
-      primaryColor,
-      highlightEffect,
-      borderColor,
-      navFontColor,
+      ...dynamic,
     }
   }
 
