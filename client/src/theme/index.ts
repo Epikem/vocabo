@@ -24,7 +24,9 @@ interface StaticTheme {
   titleSize: string;
   boxShadow: string;
   fontSize: string;
+  navPadding: string;
   themeName: ThemeName;
+  borderRadius: string;
   
   sharedEffect1: Effect;
   activeEffect: Effect;
@@ -47,6 +49,8 @@ const sharedTheme = {
   headerHeight: "100%",
   sharedEffect1:(str:string)=>'test',
   titleSize: "30px",
+  navPadding: '.5rem',
+  borderRadius: '3px',
 };
 
 const colors = {
@@ -80,12 +84,12 @@ function calculateTheme(name: ThemeName) : Theme{
   const navFontColor = highlightEffect(0.4, secondaryColor);
 
   const dynamic = {
-      fontColor,
-      primaryColor,
-      highlightEffect,
-      borderColor,
-      navFontColor,
-    }
+    fontColor,
+    primaryColor,
+    highlightEffect,
+    borderColor,
+    navFontColor,
+  }
 
   if(name === 'light'){
     ctheme = {
