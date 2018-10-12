@@ -9,12 +9,12 @@ import { createGlobalStyle, css, ThemeProvider } from "./theme";
 const Global = createGlobalStyle`
   ${({ theme: { fontColor, primaryColor, highlightEffect, fontSize } }) => css`
     div {
-      color: ${fontColor};
       background-color: inherit;
-      font-size: ${fontSize};
     }
 
     div, input, p, a, button, body {
+      color: ${fontColor};
+      font-size: ${fontSize};
       transition: all .15s linear;
       transition-property: box-shadow, border-color, height, width,
         background-color, font-size, color;
