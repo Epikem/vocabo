@@ -1,12 +1,13 @@
 import { darken, lighten } from "polished";
 import { NavLink } from "react-router-dom";
-import styled, { css } from "../../theme";
+import styled, { css } from "src/theme";
 
-export const NavItemBox = styled(NavLink)`
+export const NavItemBox = styled(NavLink).attrs<{right: boolean}>({ })`
   ${({
-    theme: { navFontColor, titleSize, hoverEffect }
+    theme: { navFontColor, titleSize, hoverEffect, navPadding }, right
   }) => css`
-    padding: 0.5rem;
+    margin-left: ${right? 'auto' : ''};
+    padding: ${navPadding};
     user-select: none;
     cursor: pointer;
 
@@ -17,9 +18,12 @@ export const NavItemBox = styled(NavLink)`
 
     :hover {
       border-bottom: 2px solid ${hoverEffect(navFontColor)};
+      color: ${hoverEffect(navFontColor)};
     }
 
-    :hover {
+    :focus {
+      outline: none;
+      border-bottom: 2px solid ${hoverEffect(navFontColor)};
       color: ${hoverEffect(navFontColor)};
     }
   `};
