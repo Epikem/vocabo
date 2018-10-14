@@ -4,3 +4,4 @@ export * from "./ThemeSelect";
 export * from "./Layout";
 export * from "./Header";
 export * from "./FlexBox";
+export * from './HeaderSearch';
