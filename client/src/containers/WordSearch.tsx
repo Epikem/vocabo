@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { Button } from "../presentational";
+import { Button, Word } from "../presentational";
 import { RootState } from "../store";
 import { SearchActions, SearchState } from '../store/search';
 
@@ -35,8 +35,10 @@ class WordSearch extends React.Component<Props, State> {
         WordSearch
         <ul>
           <li>Korean | English</li>
-          {this.props.result.map(e=>{
-            return <li key={e.id}>{e.Korean} : {e.English}</li>;
+          {this.props.result.map((e)=>{
+            return <li key={e.id}>
+              <Word word={e} />
+            </li> ;
           })}
         </ul>
         <Button>test button</Button>
