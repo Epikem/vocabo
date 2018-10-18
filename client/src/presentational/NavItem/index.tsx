@@ -2,7 +2,7 @@ import * as React from 'react';
 import { LinkProps } from 'react-router-dom';
 import { NavItemBox } from './NavItemStyles';
 
-interface NavItemProps extends LinkProps {
+export interface NavItemProps extends LinkProps {
   to: string;
   right?: boolean;
 }
