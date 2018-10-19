@@ -2,7 +2,7 @@ import { transparentize } from "polished";
 import * as React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { ThemeSelection, WordSearch } from "./containers";
+import { HeaderSearchContainer, ThemeSelection, WordSearch } from "./containers";
 import { Layout } from "./presentational";
 import { createGlobalStyle, css, ThemeProvider } from "./theme";
 
@@ -99,7 +99,7 @@ class App extends React.Component<any> {
     return (
       <ThemeProvider theme={currentTheme}>
         <BrowserRouter>
-          <Layout>
+          <Layout header={<HeaderSearchContainer/>}>
             <>
               <Switch>
                 <Route exact={true} path={"/"} component={WordSearch} />
