@@ -32,7 +32,7 @@ class WordSearch extends React.Component<Props, State> {
 
   public render() {
     return (
-      <div>
+      <Card style={{margin:'25px', backgroundColor: 'black'}}>
         WordSearch
         <ul>
           <table>
@@ -53,7 +53,7 @@ class WordSearch extends React.Component<Props, State> {
         </ul>
         <Button>test button</Button>
         <input onChange={this.handleChangeSearchText} value={this.props.searchText} />
-      </div>
+      </Card>
     );
   }
 
