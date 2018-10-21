@@ -6,3 +6,4 @@ export * from "./Header";
 export * from "./FlexBox";
 export * from './HeaderSearch';
 export * from './Word';
+export * from './Card';

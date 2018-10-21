@@ -4,6 +4,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { Button, Word } from "../presentational";
 import { RootState } from "../store";
 import { SearchActions, SearchState } from '../store/search';
+import { Card } from "src/presentational";
 
 type OwnProps = {};
 
@@ -34,6 +35,15 @@ class WordSearch extends React.Component<Props, State> {
       <div>
         WordSearch
         <ul>
+          <table>
+            <th>df fe</th>
+            <tr>
+              <td>dsd fd</td>
+              <td>dsd</td>
+              <td>dsd</td>
+              <td>dsd</td>
+            </tr>
+          </table>
           <li>Korean | English</li>
           {this.props.result.map((e)=>{
             return <li key={e.id}>
