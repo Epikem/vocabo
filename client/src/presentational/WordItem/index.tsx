@@ -6,7 +6,7 @@ const WordBox = styled.div`${({ theme }) => css`
   ${invertBox(theme)};
 `}`;
 
-export function Word({ word }: { word: Word }) {
+export function WordItem({ word }: { word: Word }) {
   return (
     <WordBox style={{ padding: ".2rem" }}>
       {word.Korean} : {word.English}

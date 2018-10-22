@@ -5,5 +5,5 @@ export * from "./Layout";
 export * from "./Header";
 export * from "./FlexBox";
 export * from './HeaderSearch';
-export * from './Word';
+export * from './WordItem';
 export * from './Card';
