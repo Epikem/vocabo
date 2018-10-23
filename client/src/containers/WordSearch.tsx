@@ -33,12 +33,12 @@ class WordSearch extends React.Component<Props, State> {
   public render() {
     return (
       <Card style={{margin:'25px', backgroundColor: 'black'}}>
-        WordSearch
+        <div style={{textAlign: 'center'}}>
+          WordSearch
+        </div>
         <ul>
           <WordList words={this.props.result}></WordList>
         </ul>
-        <Button>test button</Button>
-        <input onChange={this.handleChangeSearchText} value={this.props.searchText} />
       </Card>
     );
   }
