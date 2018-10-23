@@ -1,16 +1,31 @@
 import * as React from 'react';
 import { Word } from "src/store/search";
-import { WordItem } from '../WordItem';
+import styled, { css } from 'src/theme';
+
+const WordTable = styled.table`${({ theme }) => css`
+  margin: 30px;
+  border: 1px solid ${theme.borderColor};
+  min-width: 450px;
+`}`;
+
+const WordTableCell = styled.td`${({ theme }) => css`
+  padding: .5rem;
+  border: 1px solid ${theme.borderColor};
+`}`;
 
 export const WordList = ({words}:{words: Word[]}) => {
   return (
-    <div>
-      <li>Korean | English</li>
+    <WordTable>
+      <tr>
+        <WordTableCell>{'Korean'}</WordTableCell>
+        <WordTableCell>{'English'}</WordTableCell>
+      </tr>
       {words.map((e)=>{
-        return <li key={e.id}>
-          <WordItem word={e} />
-        </li> ;
+        return <tr key={e.id}>
+          <WordTableCell>{e.Korean}</WordTableCell>
+          <WordTableCell>{e.English}</WordTableCell>
+        </tr> ;
       })}
-    </div>
+    </WordTable>
   )
 }
