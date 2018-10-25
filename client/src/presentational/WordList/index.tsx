@@ -3,9 +3,9 @@ import { Word } from "src/store/search";
 import styled, { css } from 'src/theme';
 
 const WordTable = styled.table`${({ theme }) => css`
-  margin: 30px;
+  margin: auto;
   border: 1px solid ${theme.borderColor};
-  min-width: 450px;
+  width: 85%;
 `}`;
 
 const WordTableCell = styled.td`${({ theme }) => css`
