@@ -1,20 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { DivProps } from 'src/lib';
 
-const FlexBoxContainer = styled.div<IFlexBoxProps>`
+interface FlexBoxProps extends DivProps {
+  direction: string;
+}
+
+export const FlexBox = styled<FlexBoxProps>(({direction, children, ...rest}) => (
+  <div {...rest}>
+    {children}
+  </div>
+))`
   display: flex;
   flex-direction: ${props => props.direction};
 `;
-
-export interface IFlexBoxProps {
-  direction: string;
-  children: React.ReactNode;
-}
-
-export const FlexBox: React.SFC<IFlexBoxProps> = (props) => {
-  return (
-    <FlexBoxContainer {...props}>
-      {props.children}
-    </FlexBoxContainer>
-  );
-}

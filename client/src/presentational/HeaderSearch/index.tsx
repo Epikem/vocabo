@@ -1,10 +1,10 @@
 import * as React from "react";
 import { SearchActions } from "../../store/search";
 import { HeaderSearchInput } from "./HeaderSearchStyles";
+import { InputProps } from "src/lib";
 
-interface IHeaderSearchProps {
+interface IHeaderSearchProps extends InputProps {
   text?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export const HeaderSearch: React.SFC<IHeaderSearchProps> = props => {
