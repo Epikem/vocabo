@@ -1,0 +1,18 @@
+//ul#lang-select(class="segmented-control")
+  li#auto
+    a(href='#') Auto
+  li#english
+    a(href='#') English
+  li#hangul
+    a(href='#') 한글
+  li#hanja
+    a(href='#') 漢字
+  li#phonetic
+    a(href='#') /phonetic/
+#searchbox
+  form( method='get', action='/', id="searchform" )
+    input(type='text', name='q', id='search', class='search', value=q || '', placeholder="Search")
+    span.help-block Type in English, 한글, 漢字, then hit Enter
+    #search_parts
+    //input(type='submit', class='btn search-btn', value='Q')
+

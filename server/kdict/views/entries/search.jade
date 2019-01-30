@@ -1,0 +1,46 @@
+include ../mixins
+
+.page-header
+  h1 Search
+
+.row
+  .span16
+    include ../includes/large-search
+
+
+.row
+  .span12
+    h2 Results
+      small Showing page #{paginator.page} of #{paginator.total_pages} (#{paginator.range_str} of #{paginator.count} results)
+  .span4
+    p
+      a(href='/contribute/tagged') What are these tags?
+      | 
+      span(class="label problem") Hangul Undef
+
+.row
+  .span16
+
+    - if (entries.length == 0)
+      p No results found
+    - else
+      table.zebra-striped
+        tbody
+          - each entry in entries
+            tr
+              td.defn
+                h3
+                  - if (typeof(entry.korean.hangul) != 'undefined')
+                    a(href='/#{entry.korean.hangul}')= entry.korean.hangul
+                  - else
+                    a(href='/entries/#{entry.id}') (undefined)
+                mixin tag_list(entry.tags)
+              td
+                ol
+                  - each sense, i in entry.senses
+                    li
+                      - if (sense.hanja != '')
+                        span.hanja (#{sense.hanja}) 
+                      span.english= sense.definitions.english_all
+
+mixin paginator(paginator)

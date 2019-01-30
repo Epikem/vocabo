@@ -1,0 +1,41 @@
+.row.editable
+  .span4
+    - if ((typeof(result.korean.hangul) == 'undefined') || (result.korean.hangul == ''))
+      h2
+        a(href="/entries/#{result._id}")
+          span(data-name="entry[korean][hangul]") (Undefined)
+    -else
+      h2 
+        a(href="/entries/#{result._id}", data-name="entry[korean][hangul]")= result.korean.hangul
+  
+    h4
+      span(data-name='entry[hanja]')= result.hanja
+  
+    .edit
+      - if (typeof currentUser !== 'undefined')
+        p
+          small Double-click to edit
+          //a(href="/entries/#{result.id}/edit") Edit
+  
+  
+  .span6
+    h6 Definitions
+    //- if (results.definitions.length == 0)
+    - if (typeof(result.definitions) == 'undefined')
+      p No definition, 
+        a(href="/entries/#{result.id}/edit") add one!
+    - else
+        ul
+          - each definition, i in result.definitions.english
+            li= definition
+
+  .span6
+    h6 Examples
+
+- if (typeof(result.flags) != 'undefined')
+  .row
+    .span12.offset4
+      ul.flags
+        - each flag in result.flags
+          li= flag
+

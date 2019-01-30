@@ -1,0 +1,239 @@
+body {
+    /*padding-top: 40px;*/
+}
+
+ul.flag {
+    list-style-image: url('/images/icons/flag_orange.gif');
+}
+
+.hero-unit {
+    margin-top: 0;
+}
+
+.geeks {
+    background-image: url('/images/geeks.png');
+}
+
+
+.hanja {
+    color: #999;
+}
+
+td.defn {
+    width: 140px;
+}
+
+.label.problem { background-color:#f89406; }
+.label.user    { background-color:#62cffc; }
+
+.topbar {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.topbar h3 a:hover {
+  color: #e55900;
+}
+
+a {
+  color: #e55900;
+}
+
+a:hover {
+  color: #ff8915;
+}
+
+a:hover h4 sup {
+  text-decoration: none;
+}
+
+sup.meaning {
+    margin: 3px;
+    color: #999;
+}
+
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+    margin-left: 10px;
+}
+
+
+pre.change-raw {
+    display: none;
+}
+
+span.pending {
+    color: #ff7700;
+}
+
+tr.new {
+  background-color: #e9fff2;
+}
+tr.edit {
+  background-color: #ffffdd;
+}
+tr.delete {
+  background-color: #ffe9e9;
+}
+
+input.search {
+  padding: 3px 8px;
+  font-size: 3.5em;
+  /*font-height: 3.5em;*/
+  line-height: 1.3em;
+  height: auto;
+  width: 780px;
+  margin: 2px 0;
+}
+
+input.search-btn {
+  font-size: 3.5em;
+  font-height: auto;
+  height: auto;
+}
+
+input.big_font {
+  font-size: 2.0em;
+  font-height: 2.0em;
+  height: auto;
+}
+
+
+/*
+#searchbox input {
+    font-size: 60px;
+}
+*/
+
+/* Inspired by http://www.prcvl.com/articles/segmented-controls */
+.segmented-control {
+    list-style-type: none;
+    /*width: 283px;*/
+    height: 25px;
+    padding: 1px;
+    margin: 0 auto 8px 5px;
+    
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .15);
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .15);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .15);
+}
+ 
+.segmented-control li {
+    background-color: #595959;
+    float: left;
+    margin-left: 0px;
+}
+ 
+.segmented-control li,
+.segmented-control.alt li.selected,
+.segmented-control.alt li.selected:active {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .1)), to(rgba(255, 255, 255, 0)));
+    background-image: -moz-linear-gradient(0 0 -90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0));
+}
+ 
+.segmented-control li, .segmented-control.alt li.selected {
+    -webkit-box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .1);
+    -moz-box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .1);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .1);
+}
+ 
+.segmented-control li:first-child {
+    margin-left: 0;
+    -webkit-border-top-left-radius:    4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft:        4px;
+    -moz-border-radius-bottomleft:     4px;
+    border-top-left-radius:            4px;
+    border-bottom-left-radius:         4px;
+}
+ 
+.segmented-control li:last-child {
+    -webkit-border-top-right-radius:    4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright:        4px;
+    -moz-border-radius-bottomright:     4px;
+    border-top-right-radius:            4px;
+    border-bottom-right-radius:         4px;
+}
+ 
+.segmented-control a {
+    font-size: 12pt;
+    line-height: 18pt;
+    padding: 2px 4px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 90px;
+    /*height: 28px;*/
+}
+ 
+.segmented-control a,
+.segmented-control.alt li.selected a {
+    color: #262626;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .15);
+}
+ 
+.segmented-control li:active {background-color: #333;}
+ 
+.segmented-control li:active,
+.segmented-control.alt li.selected:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, .15),
+                        inset 0 0 5px rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, .15),
+                     inset 0 0 5px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, .15),
+                inset 0 0 5px rgba(0, 0, 0, .1);
+}
+ 
+.segmented-control li:active a,
+.segmented-control.alt li:active a {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .1);
+    position: relative;
+    top: 1px;
+}
+ 
+.segmented-control li.selected {
+    background-image:
+        -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, .1))),
+        url(../images/demos/background-segmented-control-selected.png);
+    
+    background-image:
+        -moz-linear-gradient(0% 0% -90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .1)),
+        url(../images/demos/background-segmented-control-selected.png);
+    
+    background-color: #333;
+    
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1),
+                        inset 0 0 5px rgba(0, 0, 0, .15);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1),
+                     inset 0 0 5px rgba(0, 0, 0, .15);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1),
+                inset 0 0 5px rgba(0, 0, 0, .15);
+}
+ 
+.segmented-control.alt li.selected {background-color: #4e4e4e;}
+ 
+.segmented-control li.selected a {color: #fff; text-shadow: 0 1px 0 #000;}
+ 
+.segmented-control li.selected:active {
+    background-image:
+        -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, .05))),
+        url(../images/demos/background-segmented-control-selected.png);
+        
+    background-image:
+        -moz-linear-gradient(0% 0% -90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .05)),
+        url(../images/demos/background-segmented-control-selected.png);
+    
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .15),
+                        inset 0 0 5px rgba(0, 0, 0, .15);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .15),
+                     inset 0 0 5px rgba(0, 0, 0, .15);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .15),
+                inset 0 0 5px rgba(0, 0, 0, .15);
+}
+

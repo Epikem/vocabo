@@ -1,0 +1,84 @@
+!!! 5
+html
+  head
+    -if (typeof(title) !== 'undefined')
+      title KDict - #{title}
+    -else
+      title KDict
+    // Temporary
+    link(rel='stylesheet', href='/stylesheets/bootstrap-1.3.0.min.css')
+    link(rel='stylesheet', href='/stylesheets/kdict.css')
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/fonts.css')
+    link(rel='shortcut icon', href='/favicon.ico')
+    // TODO: iOS shortcut icon
+    link(rel='apple-touch-icon', href='images/ios.png')
+
+    script(src='/javascripts/jquery-1.6.2.min.js')
+    script(src='/javascripts/jquery.editable-set.js')
+    script(src='/javascripts/korean.js')
+    script(src='/javascripts/gui.js')
+    script(src='/javascripts/bootstrap-twipsy.js')
+    script(src='/javascripts/bootstrap-popover.js')
+    script(src='/javascripts/bootstrap-dropdown.js')
+    //script(src='/javascripts/bootstrap.js')
+    include includes/analytics
+
+  body
+    .topbar(data-dropdown="dropdown")
+      .fill
+        .container
+          h3
+            a(href='/') KDict
+          ul.nav
+            li
+              a(href='/') Search
+            li.dropdown
+              a(href='#', class='dropdown-toggle') Contribute
+              ul.dropdown-menu
+                li
+                  a(href='/contribute') How?
+                li
+                  a(href='/contribute/tagged') Tagged entries
+                li
+                  a(href='/updates') Updates
+            li.dropdown
+              a(href='#', class='dropdown-toggle') Developers
+              ul.dropdown-menu
+                li
+                  a(href="/developers/contribute") Contribute
+                li
+                  a(href='/developers/download') Download
+                li
+                  a(href="#") API (Coming soon)
+            li
+              a(href='/about') About
+
+          ul.nav.secondary-nav
+            form( method="get", action="/", class="form-stacked")
+              input(type="text", name="q", placeholder="Search") //id="search", class="search")
+            - if (typeof currentUser !== 'undefined')
+              li.dropdown
+                a(href='#', class='dropdown-toggle')= currentUser.username
+                ul.menu-dropdown
+                  li
+                    a(href='/users/profile') Profile
+                  li
+                    a(href='/users/settings') Settings
+                  li.divider
+                  li
+                    a(href='/logout') Log Out
+            - else
+              li
+                a(href='/login') Log in
+
+
+    .container
+
+      != messages()
+ 
+      !=body
+
+      footer
+        p KDict 2010 
+          a(href='http://github.com/bhumphreys/kdict') Source

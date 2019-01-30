@@ -1,0 +1,11 @@
+node_modules/
+
+data/
+
+*.old
+
+public/images/icons/
+
+npm-debug.log
+
+lib/mail.conf.coffee
