@@ -9,3 +9,5 @@ public/images/icons/
 npm-debug.log
 
 lib/mail.conf.coffee
+
+res/kengdic*.tsv
