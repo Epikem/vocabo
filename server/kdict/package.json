@@ -2,6 +2,9 @@
   "name": "kdict",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "coffee ./app.coffee"
+  },
   "dependencies": {
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
@@ -24,5 +27,8 @@
     "serve-favicon": "^2.5.0",
     "step": "^1.0.0",
     "stylus": "^0.54.5"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.3.2"
   }
 }
