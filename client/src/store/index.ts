@@ -35,7 +35,7 @@ const logicMiddleware = createLogicMiddleware(rootLogic, deps);
 const middleware = applyMiddleware(logicMiddleware);
 
 /* tslint:disable-next-line */
-const enhancer = (window['devToolsExtension'] !== 'undefined') ?
+const enhancer = (window['devToolsExtension'] !== undefined) ?
   compose(
     middleware,
 /* tslint:disable-next-line */
