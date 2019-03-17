@@ -1,10 +1,10 @@
 import * as React from "react";
+import { InputChangeEvent } from "src/lib";
 import { FlexBox } from "../FlexBox";
 import { HeaderSearch } from "../HeaderSearch";
 import { NavItem } from "../NavItem";
 import { HeaderBox, LogoBox } from "./HeaderStyles";
-import { InputChangeEvent } from "src/lib";
-
+ 
 export interface HeaderProps {
   searchText?: string;
   onSearchTextChange: InputChangeEvent;

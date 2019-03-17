@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { DivProps } from 'src/lib';
+import styled from 'styled-components';
 
 interface FlexBoxProps extends DivProps {
   direction: string;
