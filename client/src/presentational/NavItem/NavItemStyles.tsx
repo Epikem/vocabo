@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 import styled, { css } from "src/theme";
 import { NavItemProps } from ".";
 
-export const NavItemBox = styled<NavItemProps>(({ right, ...rest }) => <NavLink {...rest} />)`
+const NavItemBoxComponent: React.FunctionComponent<NavItemProps> = (({ right, ...rest }) => <NavLink {...rest} />);
+
+export const NavItemBox = styled(NavItemBoxComponent)`
   ${({
     theme: { navFontColor, titleSize, hoverEffect, navPadding }, right
   }) => css`
