@@ -47,13 +47,14 @@ function is_hangul_char(ch) {
     return false;
 }
 
-app.get('/search/elastic/:query', async (req, res) => {
+app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
     var query = req.params.query;
     console.log(`autocomplete query: ${query}`);
 
     var client = new elasticsearch.Client({
         host: 'localhost:9200',
         // log: 'trace'
+        apiVersion: '6.6',
     });
 
     var results;
@@ -84,18 +85,23 @@ app.get('/search/elastic/:query', async (req, res) => {
             index: 'kengdic',
             type: 'logs',
             body: {
-                query: {
-                    match: {
-                        def: query
+                suggest: {
+                    defSuggest: {
+                        prefix: query,
+                        completion: {
+                            field: 'def',
+                        }
                     }
                 }
             }
         })
+        // console.log(client.suggest);
     
-        // console.log(response.hits.hits);
-    
-        results = response.hits.hits.map(hit => {
-            return [hit._source.def, hit._source.word]
+        // console.log(response);
+        // console.log(JSON.stringify(response.suggest));
+
+        results = response.suggest.defSuggest[0].options.map(option=>{
+            return [option.text, option._source.word];
         });
     
         console.log(results);
