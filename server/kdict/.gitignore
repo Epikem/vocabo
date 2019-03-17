@@ -11,3 +11,5 @@ npm-debug.log
 lib/mail.conf.coffee
 
 res/kengdic*.tsv
+
+scripts/kengdicDB
