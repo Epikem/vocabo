@@ -1,0 +1,15 @@
+{
+  "server":{
+    "port": 3001,
+    "api-version":1,
+  },
+  "services":{
+    "autocomplete":{
+      "naver":"autocomplete/naver",
+      "elasticsearch":"autocomplete/elastic"
+    }
+  },
+  "client":{
+    "port": 3000,
+  }
+}
