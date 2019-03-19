@@ -1,5 +1,32 @@
 version: '2'
+
+# same as
+# docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+
+# docker run -d -p 9200:9200 -p 9300:9300 --name elastic -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+# docker run -d --link elastic:elastic-url -e "ELASTICSEARCH_URL=http://elastic-url:9200" -p 5601:5601 --name kibana docker.elastic.co/kibana/kibana:6.4.0
+
 services:
+  elastic:
+    # image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    image: elastic2:0.1
+    volumes:
+      - ./docker/elastic
+    environment:
+      - discovery.type=single-node
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.0
+    volumes:
+      - ./docker/kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elastic-url:9200
+    links:
+      - elastic:elastic-url
+    ports:
+      - '5601:5601'
   server:
     build:
       context: ./server/
@@ -7,6 +34,8 @@ services:
     volumes:
       - ./server/:/usr/app
       - /usr/app/node_modules
+    depends_on:
+      - elastic
     ports:
       - "3001:3001"
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
