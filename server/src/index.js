@@ -52,7 +52,7 @@ app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
     console.log(`autocomplete query: ${query}`);
 
     var client = new elasticsearch.Client({
-        host: 'localhost:9200',
+        host: process.env.ELASTICSEARCH_URL,
         // log: 'trace'
         apiVersion: '6.6',
     });
