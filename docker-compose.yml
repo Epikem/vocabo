@@ -18,13 +18,15 @@ services:
       - '9200:9200'
       - '9300:9300'
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.4.0
+    image: docker.elastic.co/kibana/kibana:6.6.0
     volumes:
       - ./docker/kibana
     environment:
       - ELASTICSEARCH_URL=http://elastic-url:9200
     links:
       - elastic:elastic-url
+    depends_on:
+      - elastic
     ports:
       - '5601:5601'
   server:
