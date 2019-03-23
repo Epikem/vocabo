@@ -107,7 +107,7 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
   // use axios injected as httpClient from configureStore logic deps
   process({ httpClient, getState, action } : any, dispatch : any, done: any) {
       const query = action.payload.searchText;
-      const apiurl = `/search/autocomplete/en/${query}`;
+      const apiurl = `/v1.0/autocomplete/elastic/en/${query}`;
       const res = httpClient.get(apiurl);
       const isEnglishQuery = /^[a-zA-Z0-9()]+$/.test(query);
     
