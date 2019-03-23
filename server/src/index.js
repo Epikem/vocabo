@@ -59,7 +59,8 @@ app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
 
     var results;
 
-    if(is_hangul_char(query[0])){
+    if (is_hangul_char(query[0])) {
+        // hangul query
         const response = await client.search({
             index: 'kengdic',
             type: 'logs',
@@ -71,16 +72,21 @@ app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
                 }
             }
         })
-    
+
         // console.log(response.hits.hits);
-    
-        results = response.hits.hits.map(hit => {
-            return [hit._source.word, hit._source.def]
+
+        results = response.hits.hits.map((hit, idx) => {
+            return {
+                id: idx,
+                Korean: hit._source.word,
+                English: hit._source.def
+            }
         });
-    
+
         console.log(results);
 
     } else {
+        // english query
         const response = await client.search({
             index: 'kengdic',
             type: 'logs',
@@ -95,15 +101,15 @@ app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
                 }
             }
         })
-        // console.log(client.suggest);
-    
-        // console.log(response);
-        // console.log(JSON.stringify(response.suggest));
 
-        results = response.suggest.defSuggest[0].options.map(option=>{
-            return [option.text, option._source.word];
+        results = response.suggest.defSuggest[0].options.map((option, id) => {
+            return {
+                id,
+                English: option.text,
+                Korean: option._source.word
+            };
         });
-    
+
         console.log(results);
 
     }
@@ -124,10 +130,41 @@ app.get(`/v1.0/autocomplete/naver/en/:query`, (req, res) => {
     };
     request.get(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            res.writeHead(200, {
-                'Content-Type': 'text/json;charset=utf-8'
-            });
-            res.end(body);
+            const data = body;
+            const datastart = data.indexOf('{');
+            const dataend = data.lastIndexOf('}');
+            const parsed = JSON.parse(data.substr(datastart, dataend - datastart + 1));
+            const isEnglishQuery = /^[a-zA-Z0-9()]+$/.test(query);
+
+            // parsed word map
+            const result = [];
+            let i = 0;
+            const arr = [];
+            for (const list of parsed.items) {
+                arr.push(...list);
+            }
+            for (const pair of arr) {
+                if (isEnglishQuery) {
+                    result.push({
+                        id: i,
+                        English: pair[0][0],
+                        Korean: pair[1][0],
+                    })
+                } else {
+                    result.push({
+                        id: i,
+                        English: pair[1][0],
+                        Korean: pair[0][0],
+                    })
+                }
+                i += 1;
+            }
+
+            console.log('result:');
+            console.log(result);
+            // console.log(result);
+
+            res.json(result);
         } else {
             res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);
