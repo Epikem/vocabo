@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
+import { Card } from "src/presentational";
 import { Button, WordList } from "../presentational";
 import { RootState } from "../store";
 import { SearchActions, SearchState } from '../store/search';
-import { Card } from "src/presentational";
 
 type OwnProps = {};
 
