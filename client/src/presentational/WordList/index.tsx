@@ -16,16 +16,18 @@ const WordTableCell = styled.td`${({ theme }) => css`
 export const WordList = ({words}:{words: Word[]}) => {
   return (
     <WordTable>
-      <tr>
-        <WordTableCell>{'Korean'}</WordTableCell>
-        <WordTableCell>{'English'}</WordTableCell>
-      </tr>
-      {words.map((e)=>{
-        return <tr key={e.id}>
-          <WordTableCell>{e.Korean}</WordTableCell>
-          <WordTableCell>{e.English}</WordTableCell>
-        </tr> ;
-      })}
+      <tbody>
+        <tr>
+          <WordTableCell>{'Korean'}</WordTableCell>
+          <WordTableCell>{'English'}</WordTableCell>
+        </tr>
+        {words.map((e)=>{
+          return <tr key={e.id}>
+            <WordTableCell>{e.Korean}</WordTableCell>
+            <WordTableCell>{e.English}</WordTableCell>
+          </tr> ;
+        })}
+      </tbody>
     </WordTable>
   )
 }
