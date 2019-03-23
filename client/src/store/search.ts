@@ -109,40 +109,12 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
       const query = action.payload.searchText;
       const apiurl = `/v1.0/autocomplete/elastic/en/${query}`;
       const res = httpClient.get(apiurl);
-      const isEnglishQuery = /^[a-zA-Z0-9()]+$/.test(query);
     
       res.then((v: any)=>{
-        // console.log(v.data);
-        const data : string = v.data;
-        const datastart = data.indexOf('{');
-        const dataend = data.lastIndexOf('}');
-        const parsed = JSON.parse(data.substr(datastart, dataend - datastart + 1));
+        console.log(v.data);
 
         // parsed word map
-        const mapped: Word[] = [];
-        let i = 0;
-        const arr = [];
-        for(const list of parsed.items){
-          arr.push(...list);
-        }
-        for (const pair of arr) {
-          if(isEnglishQuery){
-            mapped.push({
-              id:i,
-              English: pair[0],
-              Korean: pair[1],
-            })
-          } else {
-            mapped.push({
-              id:i,
-              English: pair[1],
-              Korean: pair[0],
-            })
-          }
-          i+=1;
-        }
-        
-        // console.log(mapped);
+        const mapped: Word[] = v.data;
         return mapped;
       }).then((mapped: Word[]) => {
         const result = {
