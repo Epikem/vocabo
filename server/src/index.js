@@ -47,7 +47,7 @@ function is_hangul_char(ch) {
     return false;
 }
 
-app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
+app.get('/api/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
     var query = req.params.query;
     console.log(`autocomplete query: ${query}`);
 
@@ -120,7 +120,7 @@ app.get('/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
 
 })
 
-app.get(`/v1.0/autocomplete/naver/en/:query`, (req, res) => {
+app.get(`/api/v1.0/autocomplete/naver/en/:query`, (req, res) => {
     var query = req.params.query;
     console.log(`autocomplete query: ${query}`);
     var api_url = encodeURI(`https://ac.dict.naver.com/enendict/ac?_callback=window.__jindo2_callback.$2414&q=${query}&q_enc=utf-8&st=11001&r_format=json&r_enc=utf-8&r_lt=11001&r_unicode=0&r_escape=1`);

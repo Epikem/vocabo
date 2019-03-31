@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: client
+spec:
+  replicas: 1
+  selector:
+    app: client
+  template:
+    metadata:
+      name: client
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: epikem/vocabo-client
+          ports:
+            - containerPort: 3000

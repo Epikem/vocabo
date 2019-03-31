@@ -1,6 +1,27 @@
 version: '2'
 
 services:
+  elastic:
+    image: epikem/elastic-built:0.1
+    volumes:
+      - ./docker/elastic
+    environment:
+      - discovery.type=single-node
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:6.6.0
+  #   volumes:
+  #     - ./docker/kibana
+  #   environment:
+  #     - ELASTICSEARCH_URL=http://elastic-url:9200
+  #   links:
+  #     - elastic:elastic-url
+  #   depends_on:
+  #     - elastic
+  #   ports:
+  #     - '5601:5601'
   server:
     build:
       context: ./server/
@@ -27,5 +48,7 @@ services:
       - /usr/app/node_modules
     depends_on:
       - server
+    links:
+      - server:server-url
     ports:
       - "3000:3000"
