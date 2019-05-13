@@ -105,9 +105,19 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
   },
 
   // use axios injected as httpClient from configureStore logic deps
-  process({ httpClient, getState, action } : any, dispatch : any, done: any) {
+  process({ httpClient, getState, action }: any, dispatch: any, done: any) {
       const query = action.payload.searchText;
-      const apiurl = `/api/v1.0/autocomplete/elastic/en/${query}`;
+    const env = process.env.NODE_ENV || 'development';
+    let apiurl: string = '';
+    if (env.startsWith('dev')) {
+      apiurl = `http://localhost:3001/api/v1.0/autocomplete/elastic/en/${query}`;
+    } else {
+      const host = ((process.env.GET_HOSTS_FROM || 'dns') === 'env') ? 'server' : process.env.SERVER_SERVICE_HOST+':'+process.env.SERVER_SERVICE_PORT;
+      if (host === undefined) { throw Error; }
+      apiurl = `http://${host}/api/v1.0/autocomplete/elastic/en/${query}`;
+      // apiurl = `http://${process.env.SERVER_SERVICE_HOST}:${process.env.SERVER_SERVICE_PORT}/api/v1.0/autocomplete/elastic/en/${query}`;
+    }
+
       const res = httpClient.get(apiurl);
     
       res.then((v: any)=>{
