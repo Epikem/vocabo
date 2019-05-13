@@ -1,6 +1,8 @@
 var request = require('request');
 var express = require('express');
+var cors = require('cors');
 var app = express();
+app.use(cors());
 var elasticsearch = require('elasticsearch');
 
 require('dotenv').config();
@@ -47,12 +49,17 @@ function is_hangul_char(ch) {
     return false;
 }
 
+function getEnv(){
+    const env = process.env.NODE_ENV || 'dev';
+    return env.toLowerCase().startsWith('dev') ? 'dev' : 'prod';
+}
+
 app.get('/api/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
     var query = req.params.query;
     console.log(`autocomplete query: ${query}`);
-
+    const host = (getEnv() == 'prod') ? process.env.ELASTIC_URL : process.env.ELASTICSEARCH_URL;
     var client = new elasticsearch.Client({
-        host: process.env.ELASTICSEARCH_URL,
+        host,
         // log: 'trace'
         apiVersion: '6.6',
     });
@@ -173,5 +180,5 @@ app.get(`/api/v1.0/autocomplete/naver/en/:query`, (req, res) => {
     });
 })
 app.listen(3001, function () {
-    console.log('http://127.0.0.1:3001/translate app listening on port 3001!');
+    console.log('https://127.0.0.1:3001/translate app listening on port 3001!');
 });
