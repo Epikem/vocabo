@@ -65,20 +65,12 @@ const Global = createGlobalStyle`
       }
     `}
 
-    div {
-      background-color: inherit;
-    }
-
     div, input, p, a, button, body {
       color: ${fontColor};
       font-size: ${fontSize};
       transition: all .15s linear;
       transition-property: box-shadow, border-color, height, width,
         background-color, font-size, color;
-    }
-
-    p {
-      color: ${fontColor};
     }
 
     a {
