@@ -32,7 +32,7 @@ class WordSearch extends React.Component<Props, State> {
 
   public render() {
     return (
-      <Card style={{margin:'25px', padding:'25px', backgroundColor: 'black'}}>
+      <Card style={{margin:'25px', padding:'25px', backgroundColor:'transparent'}}>
         <div style={{textAlign: 'center', fontSize:'3rem', marginBottom:'30px'}}>
           WordSearch
         </div>
