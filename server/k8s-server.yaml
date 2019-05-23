@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vocabo-server
+  annotations:
+    kompose.cmd: E:\Apps\Scoop\apps\kompose\current\kompose.exe convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    app: vocabo-server
+spec:
+  clusterIP: None
+  ports:
+  - name: "3001"
+    port: 3001
+    targetPort: 3001
+  selector:
+    app: vocabo-server
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: E:\Apps\Scoop\apps\kompose\current\kompose.exe convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    app: vocabo-server
+  name: vocabo-server
+  # namespace: vocabo-cluster
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      app: vocabo-server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: vocabo-server
+        app: vocabo-server
+    spec:
+      containers:
+      - args:
+        - /usr/app/node_modules/.bin/nodemon
+        - src/index.js
+        image: gcr.io/epractice/vocabo-server
+        env:
+        - name: CHOKIDAR_USEPOLLING
+          value: "true"
+        - name: ELASTICSEARCH_URL
+          # value: http://vocabo-elastic:9200
+          value: http://user:dAmKkrSS5sNz@35.221.157.218:80/elasticsearch/
+        - name: NODE_ENV
+          value: development
+        name: vocabo-server
+        ports:
+        - containerPort: 3001
+        resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vocabo-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vocabo-client
+  template:
+    metadata:
+      labels:
+        app: vocabo-client
+    spec:
+      containers:
+      - name: vocabo-client
+        image: gcr.io/epractice/vocabo-client
+        ports:
+        - containerPort: 3000
+        resources:
+          # requests:
+          #   cpu: 100m
+          #   memory: 100Mi
+          limits:
+            cpu: 250m
+            memory: 250Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vocabo-client
+  labels:
+    app: vocabo-client
+spec:
+  selector:
+    app: vocabo-client
+  ports:
+  - port: 3000
+    protocol: TCP
+    nodePort: 30003
+  type: LoadBalancer

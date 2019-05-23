@@ -1,24 +1,24 @@
 version: '3'
 
 services:
-  # elastic:
-  #   image: epikem/elastic-built:0.1
-  #   volumes:
-  #     - ./docker/elastic
-  #   environment:
-  #     - discovery.type=single-node
-  #   ports:
-  #     - '9200:9200'
-  #     - '9300:9300'
-  #   deploy:
-  #     replicas: 1
-  #     update_config:
-  #       parallelism: 2
-  #       delay: 10s
-  #     restart_policy:
-  #       condition: on-failure
-  #   networks: 
-  #     - vocabo-network
+  elastic:
+    image: epikem/elastic-built:0.1
+    volumes:
+      - ./docker/elastic
+    environment:
+      - discovery.type=single-node
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    networks: 
+      - vocabo-network
   server:
     image: epikem/vocabo-server
     command: npm start
@@ -44,8 +44,8 @@ services:
     networks: 
       - vocabo-network
   client:
-    image: epikem/vocabo-client-built
-    command: serve -s build -l 3000
+    image: epikem/vocabo-client
+    command: npm start
     # volumes:
     #   - ./client/:/usr/app
     #   - /usr/app/node_modules
@@ -55,20 +55,17 @@ services:
       - server:server-url
     ports:
       - "3000:3000"
-      - "5000:5000"
     environment:
-      - NODE_ENV=development
-      # - HOST=epikem.com
-      # - PORT=3000
+      - NODE_ENV=production
     deploy:
       replicas: 1
       update_config:
         parallelism: 2
       restart_policy:
         condition: on-failure
-    # expose:
-    #   - "3000"
+    expose:
+      - "3000"
     networks: 
       - vocabo-network
 networks:
-  vocabo-network:
+  - vocabo-network
