@@ -1,0 +1,79 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vocabo-pod
+  labels:
+    io.kompose.service: vocabo-pod
+spec:
+  selector:
+    matchLabels:
+      app: vocabo
+      role: master
+      tier: client
+  replicas: 1
+  strategy: {
+    
+  }
+  template:
+    metadata:
+      namespace: vocabo-cluster
+      name: vocabo-pod
+      labels:
+        app: vocabo
+        role: master
+        tier: client
+        io.kompose.service: vocabo-pod
+    spec:
+      containers:
+      - args:
+        - npm
+        - start
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: SERVER_URL
+          value: localhost:3001
+        image: epikem/vocabo-client
+        name: client
+        ports:
+        - containerPort: 3000
+        resources: 
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 250m
+            memory: 250Mi
+      - args:
+        - npm
+        - start
+        env:
+        - name: ELASTICSEARCH_URL
+          value: http://localhost:9200              
+        - name: ELASTIC_URL
+          value: http://localhost:9200
+        - name: NODE_ENV
+          value: production
+        image: epikem/vocabo-server
+        name: server
+        ports:
+        - containerPort: 3001
+        resources: {}
+      - env:
+        - name: discovery.type
+          value: single-node
+        image: epikem/elastic-built:0.1
+        name: elastic
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+        resources: {}
+        volumeMounts:
+        - mountPath: ./docker/elastic
+          name: elastic-claim0
+      restartPolicy: Always
+      volumes:
+      - name: elastic-claim0
+        persistentVolumeClaim:
+          claimName: elastic-claim0
+status: {}

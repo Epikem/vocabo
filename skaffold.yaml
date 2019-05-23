@@ -1,0 +1,23 @@
+apiVersion: skaffold/v1beta10
+kind: Config
+build:
+  artifacts:
+  - image: gcr.io/k8s-skaffold/client
+    context: ./client/
+    sync:
+      manual:
+      - src: 'src/**/*.*'
+        dest: .
+        strip: src/
+  - image: gcr.io/k8s-skaffold/server
+    context: ./server/
+    sync:
+      manual:
+      - src: 'src/**/*.*'
+        dest: .
+        strip: src/
+deploy:
+  kubectl:
+    manifests:
+    - ./client/kubernetes/*
+    - ./server/kubernetes/*

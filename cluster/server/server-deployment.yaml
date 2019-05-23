@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Apps\Scoop\apps\kompose\current\kompose.exe convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: server
+  name: server
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: server
+      namespace: vocabo-cluster
+      name: server
+    spec:
+      hostname: vocabo
+      subdomain: server
+      containers:
+      - args:
+        - npm
+        - start
+        env:
+        - name: ELASTICSEARCH_URL
+          value: http://localhost:9200              
+        - name: ELASTIC_URL
+          value: http://elastic.vocabo-cluster.svc.cluster.local:9200
+        - name: NODE_ENV
+          value: production
+        image: epikem/vocabo-server
+        name: server
+        ports:
+        - containerPort: 3001
+        resources: {}
+      restartPolicy: Always
+status: {}

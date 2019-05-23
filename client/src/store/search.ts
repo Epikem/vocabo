@@ -1,5 +1,6 @@
 import { createLogic } from 'redux-logic';
 import { action as typedAction, ActionType, createStandardAction } from "typesafe-actions";
+import { AxiosInstance } from 'axios';
 
 type SearchActionKey =
   | "search/list/get"
@@ -78,7 +79,7 @@ const initialResult: Word[] = [
   }
 ]
 
-const SearchState : SearchState = {
+const SearchState: SearchState = {
   searchText: '',
   filters: [],
   result: initialResult,
@@ -89,10 +90,11 @@ const SearchState : SearchState = {
  * SearchLogic fetches search result from backend server 
  * and maps the result to search state
  */
-const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
+
+const SearchLogic = createLogic<SearchState, any, any, any, any, SearchActionKey>({
   // using any for not important third party library usage
   type: 'search/result/request',
-  debounce: 500, /* ms */
+  debounce: 150, /* ms */
   latest: true,  /* take latest only */
 
   /* let's prevent empty requests */
@@ -106,7 +108,7 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
 
   // use axios injected as httpClient from configureStore logic deps
   process({ httpClient, getState, action }: any, dispatch: any, done: any) {
-      const query = action.payload.searchText;
+    const query = action.payload.searchText;
     const env = process.env.NODE_ENV || 'development';
     let apiurl: string = '';
     if (env.startsWith('dev')) {
@@ -118,53 +120,53 @@ const SearchLogic = createLogic<SearchState,any,any,any,any,SearchActionKey>({
       // apiurl = `http://${process.env.SERVER_SERVICE_HOST}:${process.env.SERVER_SERVICE_PORT}/api/v1.0/autocomplete/elastic/en/${query}`;
     }
 
-      const res = httpClient.get(apiurl);
-    
-      res.then((v: any)=>{
-        console.log(v.data);
+    const res = httpClient.get(apiurl);
 
-        // parsed word map
-        const mapped: Word[] = v.data;
-        return mapped;
-      }).then((mapped: Word[]) => {
-        const result = {
-          result: mapped
-        }
-        // console.log(mapped);
-        dispatch(processSearchSuccess(result));
-      }).catch((err: any) => {
-        console.error(err); // might be a render err
-        dispatch(processSearchFailure(err))
-      })
+    res.then((v: any) => {
+      console.log(v.data);
+
+      // parsed word map
+      const mapped: Word[] = v.data;
+      return mapped;
+    }).then((mapped: Word[]) => {
+      const result = {
+        result: mapped
+      }
+      // console.log(mapped);
+      dispatch(processSearchSuccess(result));
+    }).catch((err: any) => {
+      console.error(err); // might be a render err
+      dispatch(processSearchFailure(err))
+    })
       .then(() => done()); // call done when finished dispatching
   }
 });
 
-const SearchReducer = function reducer(state = SearchState, action:SearchActionType) {
-  switch(action.type) {
-  case 'search/searchText/change':
-    return {
-      ...state,
-      searchText: action.payload.searchText,
-    }
-  case 'search/result/request':
-    return {
-      ...state,
-      fetchStatus: `fetching for ${action.payload}... ${(new Date()).toLocaleString()}`,
-    };
-  case 'search/result/success':
-    return {
-      ...state,
-      result: action.payload.result,
-      fetchStatus: `Results from ${(new Date()).toLocaleString()}`
-    };
-  case 'search/result/failure':
-    return {
-      ...state,
-      fetchStatus: `errored: ${action.payload}`
-    };
-  default:
-    return state;
+const SearchReducer = function reducer(state = SearchState, action: SearchActionType) {
+  switch (action.type) {
+    case 'search/searchText/change':
+      return {
+        ...state,
+        searchText: action.payload.searchText,
+      }
+    case 'search/result/request':
+      return {
+        ...state,
+        fetchStatus: `fetching for ${action.payload}... ${(new Date()).toLocaleString()}`,
+      };
+    case 'search/result/success':
+      return {
+        ...state,
+        result: action.payload.result,
+        fetchStatus: `Results from ${(new Date()).toLocaleString()}`
+      };
+    case 'search/result/failure':
+      return {
+        ...state,
+        fetchStatus: `errored: ${action.payload}`
+      };
+    default:
+      return state;
   }
 }
 

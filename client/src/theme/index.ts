@@ -71,7 +71,7 @@ function calculateTheme(name: ThemeName) : Theme{
 
   // calculated theme
   let ctheme : Theme;
-  const primaryColor = name === 'light' ? lighten(0.1, colors.primary) : setLightness(0.05, colors.primary);
+  const primaryColor = name === 'light' ? lighten(0.1, colors.primary) : setLightness(0.08, colors.primary);
   const secondaryColor = name === 'light' ? lighten(0.1, colors.secondary) : setLightness(0.05, colors.secondary);
   const isBrightTheme = getLuminance(primaryColor) > 0.5;
   const fontColor = isBrightTheme ? 'black' : 'white';
