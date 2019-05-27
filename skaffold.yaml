@@ -2,22 +2,20 @@ apiVersion: skaffold/v1beta10
 kind: Config
 build:
   artifacts:
-  - image: gcr.io/k8s-skaffold/client
+  - image: gcr.io/epractice/vocabo-client
     context: ./client/
     sync:
       manual:
       - src: 'src/**/*.*'
         dest: .
-        strip: src/
-  - image: gcr.io/k8s-skaffold/server
+  - image: gcr.io/epractice/vocabo-server
     context: ./server/
     sync:
       manual:
       - src: 'src/**/*.*'
         dest: .
-        strip: src/
 deploy:
   kubectl:
     manifests:
-    - ./client/kubernetes/*
-    - ./server/kubernetes/*
+    - ./client/k8s-*
+    - ./server/k8s-*

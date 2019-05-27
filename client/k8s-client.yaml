@@ -50,7 +50,7 @@ spec:
         env:
         - name: NODE_ENV
           value: development
-        image: epikem/vocabo-client
+        image: gcr.io/epractice/vocabo-client
         name: vocabo-client
         ports:
         - containerPort: 3000
