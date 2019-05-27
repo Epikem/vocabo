@@ -53,7 +53,7 @@ spec:
           value: "true"
         - name: ELASTICSEARCH_URL
           # value: http://vocabo-elastic:9200
-          value: http://user:dAmKkrSS5sNz@35.221.157.218:80/elasticsearch/
+          value: http://user:f8qH8mZvDcp6@104.199.133.102:80/elasticsearch/
         - name: NODE_ENV
           value: development
         name: vocabo-server
