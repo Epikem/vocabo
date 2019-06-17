@@ -3,7 +3,8 @@
 This package is based from the basic starter of this repo:
 https://github.com/awslabs/aws-serverless-express
 
-fill `cloudformation.yaml`
+Rename `cloudformation.sample.yaml` to `cloudformation.yaml`.
+Change `(username):(password)` item of `cloudformation.yaml` to your elasticsearch clusters' credentials. After that, follow below step.
 
 ## Example
 
