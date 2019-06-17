@@ -10,14 +10,13 @@ const router = express.Router()
 const { Client } = require('@elastic/elasticsearch');
 const { URL } = require('url');
 const request = require('request');
+require('dotenv').config();
 
 const client = new Client({
   node: {
       url: new URL(process.env.ELASTICSEARCH_URL)
   }
 })
-
-require('dotenv').config();
 var client_id = process.env.NAVER_ID;
 var client_secret = process.env.NAVER_SECRET;
 
