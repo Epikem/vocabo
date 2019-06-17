@@ -15,7 +15,7 @@ export const Header : React.SFC<HeaderProps> = (props) =>{
   return (
     <HeaderBox>
       <FlexBox direction="row">
-        <LogoBox><NavItem to="/">Memorybook</NavItem></LogoBox>
+        <LogoBox><NavItem to="/">vocabo</NavItem></LogoBox>
         <NavItem to="theme">theme</NavItem>
         <HeaderSearch onChange={onSearchTextChange} text={props.searchText} />
         <div>user menu</div>

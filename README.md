@@ -1,4 +1,4 @@
-# memorybook
+# vocabo
 
 ## tech stack
 
