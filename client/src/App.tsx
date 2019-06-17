@@ -93,6 +93,9 @@ class App extends React.Component<any> {
         <BrowserRouter>
           <Layout header={<HeaderSearchContainer/>}>
             <>
+              <a href="https://info.flagcounter.com/qhmw" style={{display: 'none'}}>
+                <img src="https://s11.flagcounter.com/count/qhmw/bg_000000/txt_FFFFFF/border_CCCCCC/columns_1/maxflags_5/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter"/>
+              </a>
               <Switch>
                 <Route exact={true} path={"/"} component={WordSearch} />
                 <Route path={"/theme"} component={ThemeSelection} />
