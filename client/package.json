@@ -23,6 +23,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts-ts": "^4.0.8",
     "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
     "redux-logic": "^2.1.1",
     "styled-components": "^4.3.2",
     "typesafe-actions": "^4.4.2"
