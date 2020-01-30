@@ -6,6 +6,7 @@ import { StateType } from "typesafe-actions";
 import { SearchActionType, SearchLogic ,SearchReducer } from "./search";
 
 import axios from 'axios';
+import { composeWithDevTools   } from 'redux-devtools-extension';
 import { createLogicMiddleware } from 'redux-logic';
 
 // import { RouterAction, LocationChangeAction } from 'react-router-redux';
@@ -35,12 +36,11 @@ const logicMiddleware = createLogicMiddleware(rootLogic, deps);
 const middleware = applyMiddleware(logicMiddleware);
 
 /* tslint:disable-next-line */
-const enhancer = (window['devToolsExtension'] !== 'undefined') ?
-  compose(
+const enhancer = 
+  composeWithDevTools (
     middleware,
 /* tslint:disable-next-line */
-    window['devToolsExtension']()
-  ) : middleware;
+  )
 
 const store = createStore(rootReducer, enhancer);
 

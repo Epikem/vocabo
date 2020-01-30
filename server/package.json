@@ -1,5 +1,5 @@
 {
-  "name": "vocabo-server-lambda",
+  "name": "vocaboServer-lambda",
   "version": "0.3.0",
   "description": "vocabo server",
   "main": "lambda.js",
@@ -37,13 +37,14 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@elastic/elasticsearch": "^7.1.0",
+    "@elastic/elasticsearch": "^7.5.0",
     "aws-serverless-express": "^3.3.3",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "hangul-js": "^0.2.6",
     "pug": "^2.0.0-rc.1",
     "request": "^2.88.0"
   }

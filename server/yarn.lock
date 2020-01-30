@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@elastic/elasticsearch@^7.1.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-7.1.0.tgz#e6f940e634d034cc0613050a1b4232cd0b4d95cc"
-  integrity sha512-evfs+W6hrC0wu11w/0xL1ZXADHiCbWnVBUbAhZe3xjaFKDfOGioHkPULaEE8uALe7PPPNAMuFErWzutAwwcU9g==
+"@elastic/elasticsearch@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-7.5.0.tgz#a54b07001e1a3912792bf9f34e6ec6a4fe0aef0c"
+  integrity sha512-ahzu451ppXepQMb3Zr8eFfWn8QR7yCcUWQjU1dS4X63Ctin0GNwwSPertt4WwDkm6MnZ25o932wAEgyMFLwzdA==
   dependencies:
     debug "^4.1.1"
     decompress-response "^4.2.0"
@@ -509,6 +509,11 @@ getpass@^0.1.1:
   integrity sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=
   dependencies:
     assert-plus "^1.0.0"
+
+hangul-js@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/hangul-js/-/hangul-js-0.2.6.tgz#3e552e3a68c76498cf2c7993ca354af7bad4730d"
+  integrity sha512-48axU8LgjCD30FEs66Xc04/8knxMwCMQw0f67l67rlttW7VXT3qRJgQeHmhiuGwWXGvSbk6YM0fhQlcjE1JFQA==
 
 har-schema@^2.0.0:
   version "2.0.0"
