@@ -29,7 +29,7 @@ const rootLogic = [
   SearchLogic
 ];
 
-const deps = { httpClient: axios };
+const deps = { httpClient: axios.create({baseURL: 'https://api.epikem.com/vocabo/'}) };
 
 const logicMiddleware = createLogicMiddleware(rootLogic, deps);
 
