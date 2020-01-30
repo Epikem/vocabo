@@ -34,6 +34,7 @@ const Global = createGlobalStyle`
         border: 0;
         font-size: ${fontSize};
         font: inherit;
+        font-family: sans-serif;
         vertical-align: baseline;
       }
       /* HTML5 display-role reset for older browsers */
