@@ -111,15 +111,23 @@ const SearchLogic = createLogic<SearchState, any, any, any, any, SearchActionKey
     const query = action.payload.searchText;
     const env = process.env.NODE_ENV || 'development';
     let apiurl: string = '';
-    if (env.startsWith('dev')) {
-      // apiurl = `http://localhost:3001/api/v1.0/autocomplete/elastic/en/${query}`;
-      apiurl = `/api/v1.0/autocomplete/elastic/en/${query}`;
+
+    const useElasticSearch = process.env.USE_ELASTIC_SEARCH || 'false';
+    if( useElasticSearch === 'false' ){
+      apiurl = `/api/v1.1/autocomplete/${query}`;
     } else {
-      const host = ((process.env.GET_HOSTS_FROM || 'dns') === 'env') ? 'server' : process.env.SERVER_SERVICE_HOST + ':' + process.env.SERVER_SERVICE_PORT;
-      if (host === undefined) { throw Error; }
-      apiurl = `http://${host}/api/v1.0/autocomplete/elastic/en/${query}`;
-      // apiurl = `http://${process.env.SERVER_SERVICE_HOST}:${process.env.SERVER_SERVICE_PORT}/api/v1.0/autocomplete/elastic/en/${query}`;
+      if (env.startsWith('dev')) {
+        // apiurl = `http://localhost:3001/api/v1.0/autocomplete/elastic/en/${query}`;
+        apiurl = `/api/v1.0/autocomplete/elastic/en/${query}`;
+      } else {
+        const host = ((process.env.GET_HOSTS_FROM || 'dns') === 'env') ? 'server' : process.env.SERVER_SERVICE_HOST + ':' + process.env.SERVER_SERVICE_PORT;
+        if (host === undefined) { throw Error; }
+        apiurl = `http://${host}/api/v1.0/autocomplete/elastic/en/${query}`;
+        // apiurl = `http://${process.env.SERVER_SERVICE_HOST}:${process.env.SERVER_SERVICE_PORT}/api/v1.0/autocomplete/elastic/en/${query}`;
+      }
     }
+    
+    console.log('apiurl : '+apiurl);
 
     const res = httpClient.get(apiurl);
 
