@@ -5,18 +5,23 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const compression = require('compression')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
-const app = express()
-const router = express.Router()
 const { Client } = require('@elastic/elasticsearch');
 const { URL } = require('url');
 const request = require('request');
+var Dictionary = require('./dictionary');
+
 require('dotenv').config();
+const app = express()
+const router = express.Router()
 
 const client = new Client({
   node: {
-      url: new URL(process.env.ELASTICSEARCH_URL)
+      url: new URL(process.env.ELASTICSEARCH_URL || 'http://localhost')
   }
 })
+
+const dictionary = new Dictionary();
+
 var client_id = process.env.NAVER_ID;
 var client_secret = process.env.NAVER_SECRET;
 
@@ -45,11 +50,33 @@ router.get('/', (req, res) => {
 })
 
 
-
 router.get('/sam', (req, res) => {
   res.sendFile(`${__dirname}/sam-logo.png`)
 })
 
+app.get('/api/v1.1/autocomplete/:query', async (req, res) => {
+  var query = req.params.query;
+  console.log(`autocomplete query: ${query}`);
+
+  var results;
+  try {
+      let start = Date.now();
+      results = await dictionary.search(query);
+      if(results.length>0)
+          console.log(results[0]);
+
+      console.log(`search time: ${Date.now() - start}`);
+      res.status(200);
+      res.json(results);
+  } catch (error) {
+      console.warn(error);
+      console.warn('error!!!')
+      console.warn(JSON.stringify(error))
+      res.status(500);
+      res.json({});
+  }
+  res.end();
+})
 
 router.get('/translate/:from/:to/:queryString', function (req, res) {
   var {
@@ -83,18 +110,12 @@ router.get('/translate/:from/:to/:queryString', function (req, res) {
   });
 });
 
-function is_hangul_char(ch) {
-  const c = ch.charCodeAt(0);
-  if (0x1100 <= c && c <= 0x11FF) return true;
-  if (0x3130 <= c && c <= 0x318F) return true;
-  if (0xAC00 <= c && c <= 0xD7A3) return true;
-  return false;
-}
 
 function getEnv(){
   const env = process.env.NODE_ENV || 'dev';
   return env.toLowerCase().startsWith('dev') ? 'dev' : 'prod';
 }
+
 
 router.get('/api/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
   var query = req.params.query;
@@ -187,6 +208,34 @@ router.get('/api/v1.0/autocomplete/elastic/en/:query', async (req, res) => {
       res.json({});
       res.end();
   }
+
+})
+
+router.get('/api/v1.1/autocomplete/:query', async (req, res) => {
+  var query = req.params.query;
+  console.log(`autocomplete query: ${query}`);
+  const host = (getEnv() == 'prod') ? process.env.ELASTIC_URL : process.env.ELASTICSEARCH_URL;
+  // var client = new elasticsearch.Client({
+  //     host,
+  //     // log: 'trace'
+  //     apiVersion: '6.6',
+  // });
+
+  var results;
+  try {
+    console.log(query);
+    results = search(query[0]);
+
+    res.status(200);
+    res.json(results);
+  } catch (error) {
+    console.warn(error);
+    console.warn('error!!!')
+    console.warn(JSON.stringify(error))
+    res.status(500);
+    res.json({});
+  }
+  res.end();
 
 })
 
