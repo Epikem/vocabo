@@ -3,10 +3,13 @@ var cors = require('cors');
 var app = express();
 const request = require('request');
 var { Client } = require('@elastic/elasticsearch');
+const customDomainReroute = require('@turinggroup/serverless-express-custom-domain-middleware').customDomainReroute
 var Dictionary = require('./dictionary');
 require('dotenv').config();
 
 app.use(cors());
+app.use(customDomainReroute);
+
 
 // let dictionary='';
 

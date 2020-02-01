@@ -8,9 +8,12 @@ const awsServerlessExpressMiddleware = require('aws-serverless-express/middlewar
 const { Client } = require('@elastic/elasticsearch');
 const { URL } = require('url');
 const request = require('request');
+const customDomainReroute = require('@turinggroup/serverless-express-custom-domain-middleware').customDomainReroute
 var Dictionary = require('./dictionary');
 
 require('dotenv').config();
+const app = express();
+app.use(customDomainReroute);
 app.use(cors());
 
 const router = express.Router()

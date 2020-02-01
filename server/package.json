@@ -38,6 +38,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@elastic/elasticsearch": "^7.5.0",
+    "@turinggroup/serverless-express-custom-domain-middleware": "^1.1.0",
     "aws-serverless-express": "^3.3.3",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
