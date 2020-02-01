@@ -11,7 +11,8 @@ const request = require('request');
 var Dictionary = require('./dictionary');
 
 require('dotenv').config();
-const app = express()
+app.use(cors());
+
 const router = express.Router()
 
 const client = new Client({
@@ -35,7 +36,6 @@ if (process.env.NODE_ENV === 'test') {
   router.use(compression())
 }
 
-router.use(cors())
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(awsServerlessExpressMiddleware.eventContext())
