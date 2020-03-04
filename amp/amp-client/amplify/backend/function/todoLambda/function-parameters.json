@@ -1,0 +1,9 @@
+{
+    "permissions": {
+        "auth": {
+            "vocabo8febfc5e": [
+                "read"
+            ]
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "vocabo": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-vocabo-vocabo-175144-authRole",
+            "UnauthRoleArn": "arn:aws:iam::014553383153:role/amplify-vocabo-vocabo-175144-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::014553383153:role/amplify-vocabo-vocabo-175144-authRole",
+            "Region": "ap-northeast-2",
+            "DeploymentBucketName": "amplify-vocabo-vocabo-175144-deployment",
+            "UnauthRoleName": "amplify-vocabo-vocabo-175144-unauthRole",
+            "StackName": "amplify-vocabo-vocabo-175144",
+            "StackId": "arn:aws:cloudformation:ap-northeast-2:014553383153:stack/amplify-vocabo-vocabo-175144/71b1f480-5df5-11ea-a5f1-0247705dbe2a",
+            "AmplifyAppId": "d3ay091imtiif5"
+        },
+        "categories": {
+            "auth": {
+                "vocabo8febfc5e": {}
+            }
+        }
+    }
+}
