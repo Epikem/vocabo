@@ -3,6 +3,8 @@
 ## tech stack
 
 ### client
+- aws cloudfront
+- aws s3
 - react
 - react-router
 - styled-component
@@ -10,10 +12,11 @@
 - typescript
 
 ### server
-- elasticsearch
+- aws lambda
+- aws cloudformation
 - express
 
-## getting started
+## getting started (obsolete. TODO: update this)
 
 To run this project, go client or server folder then install packages with `yarn` or `npm install` command.
 On server, use `yarn dev` or `npm run dev` command to start watch.
