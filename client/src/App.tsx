@@ -5,6 +5,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { HeaderSearchContainer, ThemeSelection, WordSearch } from "./containers";
 import { Layout } from "./presentational";
 import { createGlobalStyle, css, ThemeProvider } from "./theme";
+import Amplify, { API } from 'aws-amplify';
+import awsConfig from './aws-exports';
+import { withAuthenticator } from 'aws-amplify-react';
+
+Amplify.configure(awsConfig);
+
+let apiName = 'todoAPI'
+let path = '/items'
 
 const Global = createGlobalStyle`
   ${({ theme: { fontColor, primaryColor, highlightEffect, fontSize } }) => css`
@@ -114,4 +122,4 @@ const mapStateToProps = (state: any) => ({
   currentTheme: state.theme.currentTheme
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withAuthenticator(App,false ));
