@@ -8,13 +8,13 @@ export const changeTheme = (theme: string) => typedAction(CHANGE, theme);
 
 type themes = typeof changeTheme;
 
-type ThemesActionType = ActionType<themes>;
+export type ThemesActionType = ActionType<themes>;
 
-interface IThemesState {
+export interface IThemesState {
   readonly currentTheme: Theme;
 }
 
-const ThemesReducer = combineReducers<IThemesState, ThemesActionType>({
+export const ThemesReducer = combineReducers<IThemesState, ThemesActionType>({
   currentTheme: (state = getTheme('dark'), action) => {
     switch (action.type) {
       case CHANGE:
@@ -29,5 +29,3 @@ const ThemesReducer = combineReducers<IThemesState, ThemesActionType>({
     }
   }
 });
-
-export { ThemesReducer, IThemesState, ThemesActionType };

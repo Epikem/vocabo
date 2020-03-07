@@ -13,7 +13,7 @@ Theme
 >;
 
 
-type Effect = (...args:Array<number|string>) => string;
+type Effect = (...args:Array<any>) => string;
 
 type ThemeName = 
   | "light"

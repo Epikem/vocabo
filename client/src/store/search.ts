@@ -31,9 +31,9 @@ const addSearchFilter = (filter: Filter) => {
   typedAction('search/filters/add', filter)
 };
 
-type SearchActions = typeof SearchActions;
+export type SearchActions = typeof SearchActions;
 
-const SearchActions = {
+export const SearchActions = {
   addSearchFilter,
   changeSearchText,
   getAutocompleteList,
@@ -42,7 +42,7 @@ const SearchActions = {
   processSearchFailure,
 }
 
-type SearchActionType = ActionType<typeof SearchActions>;
+export type SearchActionType = ActionType<typeof SearchActions>;
 
 type Language = "English" | "Korean";
 
@@ -59,7 +59,7 @@ type Filter = {
   };
 };
 
-type SearchState = {
+export type SearchState = {
   searchText: string;
   filters: Filter[];
   result: Word[];
@@ -79,7 +79,7 @@ const initialResult: Word[] = [
   }
 ]
 
-const SearchState: SearchState = {
+export const SearchState: SearchState = {
   searchText: '',
   filters: [],
   result: initialResult,
@@ -91,7 +91,7 @@ const SearchState: SearchState = {
  * and maps the result to search state
  */
 
-const SearchLogic = createLogic<SearchState, any, any, any, any, SearchActionKey>({
+export const SearchLogic = createLogic<SearchState, any, any, any, any, SearchActionKey>({
   // using any for not important third party library usage
   type: 'search/result/request',
   debounce: 150, /* ms */
@@ -151,7 +151,7 @@ const SearchLogic = createLogic<SearchState, any, any, any, any, SearchActionKey
   }
 });
 
-const SearchReducer = function reducer(state = SearchState, action: SearchActionType) {
+export const SearchReducer = function reducer(state = SearchState, action: SearchActionType) {
   switch (action.type) {
     case 'search/searchText/change':
       return {
@@ -179,4 +179,4 @@ const SearchReducer = function reducer(state = SearchState, action: SearchAction
   }
 }
 
-export { SearchActions, SearchState, SearchActionType, SearchReducer, SearchLogic };
+// export { SearchActions, SearchState, SearchActionType, SearchReducer, SearchLogic };
