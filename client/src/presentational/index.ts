@@ -7,3 +7,4 @@ export * from "./FlexBox";
 export * from './HeaderSearch';
 export * from './WordList';
 export * from './Card';
+export * from './MenuPanel';
