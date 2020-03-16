@@ -10,7 +10,8 @@ function createMenuAction<T extends MenuActionKey>(actionType: T) {
   return createStandardAction(actionType);
 }
 
-const toggleMenu = createMenuAction('menu/toggle')<{ isOpened: boolean }>();
+// const toggleMenu = createMenuAction('menu/toggle')<{ isOpened: boolean }>();
+const toggleMenu = createMenuAction('menu/toggle')();
 
 export type MenuActions = typeof MenuActions;
 
@@ -26,8 +27,8 @@ const MenuState : IMenuState = {
 export type MenuActionType = ActionType<typeof MenuActions>;
 
 export interface IMenuState {
-  readonly opened: Boolean;
-  readonly signedIn: Boolean;
+  readonly opened: boolean;
+  readonly signedIn: boolean;
 }
 
 export const MenuReducer = function reducer(state = MenuState, action: MenuActionType){
@@ -35,7 +36,7 @@ export const MenuReducer = function reducer(state = MenuState, action: MenuActio
     case 'menu/toggle':
       return {
         ...state,
-        opened: !action.payload.isOpened,
+        opened: !state.opened,
       };
   
     default:
