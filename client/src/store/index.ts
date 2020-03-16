@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { CountersActionType, CountersReducer } from "./counters";
 import { ThemesActionType, ThemesReducer } from "./themes";
+import { MenuActionType, MenuReducer } from "./menu";
 
 import { StateType } from "typesafe-actions";
 import { SearchActionType, SearchLogic ,SearchReducer } from "./search";
@@ -13,7 +14,7 @@ import { createLogicMiddleware } from 'redux-logic';
 // type ReactRouterAction = RouterAction | LocationChangeAction;
 
 export type RootState = StateType<typeof rootReducer>;
-export type RootAction = CountersActionType | ThemesActionType | SearchActionType;
+export type RootAction = CountersActionType | ThemesActionType | SearchActionType | MenuActionType;
 
 // import { composeEnhancers } from './utils';
 // import { routerReducer } from 'react-router-redux';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   counter: CountersReducer,
   search: SearchReducer,
   theme: ThemesReducer,
+  menu: MenuReducer,
 });
 
 const rootLogic = [
