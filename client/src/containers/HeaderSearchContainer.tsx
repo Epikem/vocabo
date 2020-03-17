@@ -33,12 +33,13 @@ class HeaderSearchContainer extends React.Component<Props, State> {
   }
 
   public render() {
-    const { handleChangeSearchText, handleMenuButtonClick } = this;
+    const { handleChangeSearchText, handleMenuButtonClick, handleMenuOutsideClick } = this;
     const { searchText, menuVisible } = this.props;
     return (
       <Header 
         onSearchTextChange={handleChangeSearchText} 
         onMenuButtonClick={handleMenuButtonClick}
+        onMenuOutsideClick={handleMenuOutsideClick}
         searchText={searchText}
         menuVisible={menuVisible}
       />
@@ -52,6 +53,12 @@ class HeaderSearchContainer extends React.Component<Props, State> {
 
   private handleMenuButtonClick: HeaderProps['onMenuButtonClick'] = (e) => {
     this.props.toggleMenuPanel();
+  }
+
+  private handleMenuOutsideClick: HeaderProps['onMenuOutsideClick'] = (e) => {
+    if(this.props.menuVisible){
+      this.props.toggleMenuPanel();
+    }
   }
 }
 

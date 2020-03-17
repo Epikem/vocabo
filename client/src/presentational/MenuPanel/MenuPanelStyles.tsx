@@ -24,7 +24,7 @@ export const MenuPanelBox = styled(MenuPanelBoxComponent)`
     width: 20%;
     position: fixed;
     right: ${visible? '0' : '-25%'};
-    top: 40px;
+    top: 0;
     height: 100%;
 
     /* :hover {
