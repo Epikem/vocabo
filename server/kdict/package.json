@@ -18,7 +18,7 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
     "jade": "^1.11.0",
-    "less": "^3.9.0",
+    "less": "^3.12.2",
     "less-middleware": "^3.1.0",
     "mailer": "^0.6.7",
     "method-override": "^3.0.0",
