@@ -9,7 +9,7 @@
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^4.3.5",
     "@types/styled-components": "^4.4.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chalk": "^3.0.0",
     "config": "^3.2.5",
     "dotenv": "^8.2.0",
